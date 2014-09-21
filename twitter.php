@@ -23,7 +23,7 @@ $today = new DateTime();
 
 $time = $today->format("H時i分");
 
-if (isset($Available_Room)){
+if (empty($Available_Room)){
 	$announce = $time."現在の部室の空き状況をお知らせします。";
 }else{
 	$announce = $time."現在、空いている部室はありません。";
