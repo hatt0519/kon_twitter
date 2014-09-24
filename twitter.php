@@ -24,16 +24,16 @@ $today = new DateTime();
 $time = $today->format("H時i分");
 
 if (!empty($Available_Room)){
-	$announce = $time."現在の部室の空き状況をお知らせします。";
+	$announce = "お姉ちゃん！！".$time."現在の部室の空き状況を教えるね！！";
 }else{
-	$announce = $time."現在、空いている部室はありません。";
+	$announce = $time."お姉ちゃん！！残念だけど今空いている部室はないよ。。。";
 }
 
 //投稿
 $req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 
 foreach ($Available_Room as $key => $val) {
-	$message = $time."現在、".$val->period."限の".$val->room."室が空いています\n予約はこちらからhttp://www.kendai-kon.info/new_input.cgi?id=".$val->id."&week_id=".$val->week_id;
+	$message = $time."現在、".$val->period."限の".$val->room."室が空いてるよ！！\n予約はこちらからしてね！！http://www.kendai-kon.info/new_input.cgi?id=".$val->id."&week_id=".$val->week_id;
 	//投稿
 	$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 }
