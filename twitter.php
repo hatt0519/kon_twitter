@@ -26,11 +26,11 @@ $time = $today->format("H時i分");
 if($time == "08時45分"){
 
 	if(empty($holiday_checker)){
-		$announce = "お姉ちゃん!!今日休日日程だから気をつけてね!!1限と3限以外開始時刻が違うよ!!";
+		$greeting = "お姉ちゃん!!今日休日日程だから気をつけてね!!1限と3限以外開始時刻が違うよ!!";
 	}else{
-		$announce = "お姉ちゃんおはよう!!今日も一日がんばろうね!!";
+		$greeting = "お姉ちゃんおはよう!!今日も一日がんばろうね!!";
 	}
-	$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
+	$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$greeting));
 }
 
 if (!empty($Available_Room)){
