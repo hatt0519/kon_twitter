@@ -21,8 +21,8 @@ $to = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_toke
 
 $today = new DateTime();
 
-//$time = $today->format("H時i分");
-$time = "08時45分";
+$time = $today->format("H時i分");
+//$time = "08時45分";
 if($time == "08時45分"){
 
 	if(empty($holiday_checker)){
