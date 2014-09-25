@@ -6,7 +6,7 @@ require_once("Curl.class.php");
 $Curl = new Curl();
 
 $Available_Room = json_decode($Curl->GetAvailableRoom());
-$holiday_checker = json_decode($Curl->holiday_checker());
+$holiday_checker = json_decode($Curl->GetholidayChecker());
 
 // Consumer keyの値
 $consumer_key = "aa4l2kTzNrGWKJjXIz2XI9vSK";
@@ -21,8 +21,8 @@ $to = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_toke
 
 $today = new DateTime();
 
-$time = $today->format("H時i分");
-
+//$time = $today->format("H時i分");
+$time = "08時45分";
 if($time == "08時45分"){
 
 	if(empty($holiday_checker)){
@@ -30,6 +30,7 @@ if($time == "08時45分"){
 	}else{
 		$announce = "お姉ちゃんおはよう!!今日も一日がんばろうね!!";
 	}
+	$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 }
 
 if (!empty($Available_Room)){
@@ -42,8 +43,25 @@ if (!empty($Available_Room)){
 $req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 
 foreach ($Available_Room as $key => $val) {
-	$message = $time."現在、".$val->period."限の".$val->room."室が空いてるよ！！\n予約はこちらからしてね！！http://www.kendai-kon.info/new_input.cgi?id=".$val->id."&week_id=".$val->week_id;
-	//投稿
+	if ($time == "12時10分"){
+		if($val->period > 2){
+			$message = $time."現在、".$val->period."限の".$val->room."室が空いてるよ！！\n予約はこちらからしてね！！http://www.kendai-kon.info/new_input.cgi?id=".$val->id."&week_id=".$val->week_id;
+		}
+	}elseif($time == "14時30分"){
+		if($val->period > 3){
+			$message = $time."現在、".$val->period."限の".$val->room."室が空いてるよ！！\n予約はこちらからしてね！！http://www.kendai-kon.info/new_input.cgi?id=".$val->id."&week_id=".$val->week_id;
+		}
+	}elseif($time == "16時10分"){
+		if($val->period > 4){
+			$message = $time."現在、".$val->period."限の".$val->room."室が空いてるよ！！\n予約はこちらからしてね！！http://www.kendai-kon.info/new_input.cgi?id=".$val->id."&week_id=".$val->week_id;
+		}
+	}elseif ($time == "17時50分") {
+		if($val->period > 5){
+			$message = $time."現在、".$val->period."限の".$val->room."室が空いてるよ！！\n予約はこちらからしてね！！http://www.kendai-kon.info/new_input.cgi?id=".$val->id."&week_id=".$val->week_id;
+		}
+	}else{
+		$message = $time."現在、".$val->period."限の".$val->room."室が空いてるよ！！\n予約はこちらからしてね！！http://www.kendai-kon.info/new_input.cgi?id=".$val->id."&week_id=".$val->week_id;
+	}
 	$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 }
 
