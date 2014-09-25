@@ -6,7 +6,7 @@ require_once("Curl.class.php");
 $Curl = new Curl();
 
 $Available_Room = json_decode($Curl->GetAvailableRoom());
-
+$holiday_checker = json_decode($Curl->holiday_checker());
 
 // Consumer keyの値
 $consumer_key = "aa4l2kTzNrGWKJjXIz2XI9vSK";
@@ -22,6 +22,15 @@ $to = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_toke
 $today = new DateTime();
 
 $time = $today->format("H時i分");
+
+if($time == "08時45分"){
+
+	if(empty($holiday_checker)){
+		$announce = "お姉ちゃん!!今日休日日程だから気をつけてね!!1限と3限以外開始時刻が違うよ!!";
+	}else{
+		$announce = "お姉ちゃんおはよう!!今日も一日がんばろうね!!";
+	}
+}
 
 if (!empty($Available_Room)){
 	$announce = "お姉ちゃん！！".$time."現在の部室の空き状況を教えるね！！";
