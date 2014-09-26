@@ -22,8 +22,8 @@ $to = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_toke
 
 $today = new DateTime();
 
-$time = $today->format("H時i分");
-//$time = "14時30分";
+//$time = $today->format("H時i分");
+$time = "14時30分";
 
 if($ban_checker->ban_flg == 1){
 	$ban = "ごめんね、残念だけど今日は部室の使用禁止なんだ。。。";
@@ -63,7 +63,7 @@ if($ban_checker->ban_flg == 1){
 			$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 		}
 	}else{
-		$message = "ごめんね、今空いてる部室ないんだ。。。";
+		$message = "ごめんね、今空いてる部室ないんだ。みんな練習がんばってるね！！";
 		$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 	}
 
