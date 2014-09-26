@@ -8,6 +8,7 @@ $Curl = new Curl();
 $Available_Room = json_decode($Curl->GetAvailableRoom());
 $holiday_checker = json_decode($Curl->GetholidayChecker());
 $ban_checker = json_decode($Curl->GetbanChecker());
+$next_day_schedule = json_decode($Curl->GetNextDay());
 
 // Consumer keyの値
 $consumer_key = "aa4l2kTzNrGWKJjXIz2XI9vSK";
@@ -29,7 +30,7 @@ if($ban_checker->ban_flg == 1){
 	$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$ban));
 }else{	
 
-	if($time == "08時45分"){
+	if($time == "08時00分"){
 
 		if(empty($holiday_checker)){
 			$greeting = "部員のみなさん!!今日休日日程だから気をつけてね!!1限と3限以外開始時刻が違うよ!!";
