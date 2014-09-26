@@ -25,22 +25,22 @@ $today = new DateTime();
 $time = $today->format("H時i分");
 //$time = "08時45分";
 if($ban_checker->ban_flg == 1){
-	$ban = "お姉ちゃん、残念だけど今日は部室の使用禁止なんだ。。。";
+	$ban = "ごめんね、残念だけど今日は部室の使用禁止なんだ。。。";
 	$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$ban));
 }else{	
 
 	if($time == "08時45分"){
 
 		if(empty($holiday_checker)){
-			$greeting = "お姉ちゃん!!今日休日日程だから気をつけてね!!1限と3限以外開始時刻が違うよ!!";
+			$greeting = "部員のみなさん!!今日休日日程だから気をつけてね!!1限と3限以外開始時刻が違うよ!!";
 		}else{
-			$greeting = "お姉ちゃんおはよう!!今日も一日がんばろうね!!";
+			$greeting = "部員のみなさんおはよう!!今日も一日がんばろうね!!";
 		}
 		$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$greeting));
 	}
 
 	if (!empty($Available_Room)){
-		$announce = "お姉ちゃん！！".$time."現在の部室の空き状況を教えるね！！";
+		$announce = "部員のみなさん！！".$time."現在の部室の空き状況を教えるね！！";
 	}else{
 		$announce = $time."お姉ちゃん！！残念だけど今空いている部室はないよ。。。";
 	}
