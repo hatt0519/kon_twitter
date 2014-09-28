@@ -30,7 +30,7 @@ if($ban_checker->ban_flg == 1){
 	$time = $today->format("H時i分");
 	//$time = "08時00分";	
 	switch($time){
-		case "08時00分":
+		case "08時30分":
 			$Available_Room = json_decode($Curl->GetAvailableRoom());
 			if(empty($holiday_checker)){
 				$greeting = "軽音のみなさん!!今日休日日程だから気をつけてね!!1限と3限以外開始時刻が違うよ!!";
@@ -75,7 +75,7 @@ if($ban_checker->ban_flg == 1){
 		$message = "ごめんね、".$time."現在、空いてる部室ないんだ。みんな練習がんばってるね！！";
 		$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 	}
-
+}
 //レスポンスを表示する場合は下記コメントアウトを外す
-//header("Content-Type: application/xml");
-//echo $req;
+header("Content-Type: application/xml");
+echo $req;
