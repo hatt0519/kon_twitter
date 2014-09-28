@@ -2,12 +2,14 @@
 
 require_once("twitteroauth.php"); //twitteroauth.phpのパス。同一ディレクトリにOAuth.phpも設置する
 require_once("Curl.class.php");
-
+//require_once("accsess_key.yml"); //各種key
 $Curl = new Curl();
 
 $holiday_checker = json_decode($Curl->GetholidayChecker());
 $ban_checker = json_decode($Curl->GetbanChecker());
 $next_day_schedule = json_decode($Curl->GetNextDay());
+
+//$key_ary = S
 
 // Consumer keyの値
 $consumer_key = "aa4l2kTzNrGWKJjXIz2XI9vSK";
@@ -21,15 +23,16 @@ $access_token_secret = "JZ5gghLrHzBh6cdx3bDCx5hGvukGY7lKRfkcnkVNJV30S";
 $to = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
 
 $today = new DateTime();
-
 $time = $today->format("H時i分");
-//$time = "17時50分";
+//$time = "08時00分";
 
 if($ban_checker->ban_flg == 1){
 	$ban = "ごめんね、残念だけど今日は部室の使用禁止なんだ。。。";
 	$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$ban));
-}else{	
-
+}else{
+	$today = new DateTime();
+	$time = $today->format("H時i分");
+	//$time = "08時00分";	
 	$announce = "部員のみなさん！！".$time."現在の部室の空き状況を教えるね！！";
 	//投稿
 	$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
@@ -63,7 +66,7 @@ if($ban_checker->ban_flg == 1){
 			$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 		}
 	}else{
-		$message = "ごめんね、今空いてる部室ないんだ。みんな練習がんばってるね！！";
+		$message = "ごめんね、".$time."現在、空いてる部室ないんだ。みんな練習がんばってるね！！";
 		$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 	}
 
