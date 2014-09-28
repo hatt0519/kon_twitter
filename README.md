@@ -6,3 +6,6 @@ kon_twitter
 #Curl.class.php
 -curlを実行させるクラス。メソッドはAPIから練習表データを受ける処理のみ。
 
+#access_key.yml.dist
+-これをもとにtwitterAPIを通じて投稿するためのkeyを管理するaccess_key.ymlを作成する。
+-access_key.ymlを作成したらtwitter.phpにて読み込まれる。
