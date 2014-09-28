@@ -22,6 +22,69 @@ class Curl {
 		return $response;
 	}
 
+	function GetAvailableRoom_12_10(){
+
+		$conn = curl_init();
+
+		$url = 'http://v157-7-235-60.z1d6.static.cnode.jp/available_room_12_10.json';
+		 
+		curl_setopt($conn, CURLOPT_URL, $url);
+		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
+		 
+		$response = curl_exec($conn);
+		 
+		curl_close($conn);
+
+		return $response;
+	}
+
+	function GetAvailableRoom_14_30(){
+
+		$conn = curl_init();
+
+		$url = 'http://v157-7-235-60.z1d6.static.cnode.jp/available_room_14_30.json';
+		 
+		curl_setopt($conn, CURLOPT_URL, $url);
+		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
+		 
+		$response = curl_exec($conn);
+		 
+		curl_close($conn);
+
+		return $response;
+	}
+
+	function GetAvailableRoom_16_10(){
+
+		$conn = curl_init();
+
+		$url = 'http://v157-7-235-60.z1d6.static.cnode.jp/available_room_16_10.json';
+		 
+		curl_setopt($conn, CURLOPT_URL, $url);
+		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
+		 
+		$response = curl_exec($conn);
+		 
+		curl_close($conn);
+
+		return $response;
+	}
+
+	function GetAvailableRoom_17_50(){
+
+		$conn = curl_init();
+
+		$url = 'http://v157-7-235-60.z1d6.static.cnode.jp/available_room_17_50.json';
+		 
+		curl_setopt($conn, CURLOPT_URL, $url);
+		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
+		 
+		$response = curl_exec($conn);
+		 
+		curl_close($conn);
+
+		return $response;
+	}
 	function GetholidayChecker(){
 
 		$conn = curl_init();
