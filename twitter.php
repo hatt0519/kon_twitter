@@ -2,25 +2,27 @@
 
 require_once("twitteroauth.php"); //twitteroauth.phpのパス。同一ディレクトリにOAuth.phpも設置する
 require_once("Curl.class.php");
-//require_once("accsess_key.yml"); //各種key
+require_once("spyc.php");
+require_once("access_key.yml"); //各種key
 $Curl = new Curl();
 
 $holiday_checker = json_decode($Curl->GetholidayChecker());
 $ban_checker = json_decode($Curl->GetbanChecker());
 $next_day_schedule = json_decode($Curl->GetNextDay());
 
-//$key_ary = S
+$key_ary = Spyc::YAMLLoad('access_key.yml');
 
 // Consumer keyの値
-$consumer_key = "aa4l2kTzNrGWKJjXIz2XI9vSK";
+$consumer_key = $key_ary["consumer_key"];
 // Consumer secretの値
-$consumer_secret = "677oNtWD24HsIxJLLYuVsoImrWxLaz7nTbKeUKBhofxZzrBlCn";
+$consumer_secret = $key_ary["consumer_secret"];
 // Access Tokenの値
-$access_token = "2791583394-sxUUyWvMMF5WeMmfARiX1uYtvuZcve0hz3jLXuJ";
+$access_token = $key_ary["access_token"];
 // Access Token Secretの値
-$access_token_secret = "JZ5gghLrHzBh6cdx3bDCx5hGvukGY7lKRfkcnkVNJV30S";
+$access_token_secret = $key_ary["access_token_secret"];
 // OAuthオブジェクト生成
 $to = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
+
 
 $today = new DateTime();
 $time = $today->format("H時i分");
