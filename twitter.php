@@ -9,7 +9,7 @@ $holiday_checker = json_decode($Curl->GetholidayChecker());
 $ban_checker = json_decode($Curl->GetbanChecker());
 $next_day_schedule = json_decode($Curl->GetNextDay());
 
-$key_ary = Spyc::YAMLLoad('access_key.yml');
+$key_ary = Spyc::YAMLLoad('access_key.yml'); //YAMLをPHP配列に変換
 
 // Consumer keyの値
 $consumer_key = $key_ary["consumer_key"];
@@ -27,8 +27,8 @@ if($ban_checker->ban_flg == 1){
 	$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$ban));
 }else{
 	$today = new DateTime();
-	$time = $today->format("H時i分");
-	//$time = "08時00分";	
+	//$time = $today->format("H時i分");
+	$time = "12時10分";	
 	switch($time){
 		case "08時30分":
 			$Available_Room = json_decode($Curl->GetAvailableRoom());
@@ -77,5 +77,5 @@ if($ban_checker->ban_flg == 1){
 	}
 }
 //レスポンスを表示する場合は下記コメントアウトを外す
-header("Content-Type: application/xml");
-echo $req;
+//header("Content-Type: application/xml");
+//echo $req;
