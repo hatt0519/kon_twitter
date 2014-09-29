@@ -27,8 +27,8 @@ if($ban_checker->ban_flg == 1){
 	$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$ban));
 }else{
 	$today = new DateTime();
-	//$time = $today->format("H時i分");
-	$time = "16時10分";	
+	$time = $today->format("H時i分");
+	//$time = "16時10分";	
 	switch($time){
 		case "08時30分":
 			$Available_Room = json_decode($Curl->GetAvailableRoom());
