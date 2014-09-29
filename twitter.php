@@ -28,7 +28,7 @@ if($ban_checker->ban_flg == 1){
 }else{
 	$today = new DateTime();
 	//$time = $today->format("H時i分");
-	$time = "12時10分";	
+	$time = "16時10分";	
 	switch($time){
 		case "08時30分":
 			$Available_Room = json_decode($Curl->GetAvailableRoom());
