@@ -9,7 +9,7 @@ $holiday_checker = json_decode($Curl->GetholidayChecker());
 $ban_checker = json_decode($Curl->GetbanChecker());
 $next_day_schedule = json_decode($Curl->GetNextDay());
 
-$json = file_get_contents("./access_key.json");
+$json = readfile("./access_key.json");
 $access_key = json_decode($json); //jsonファイルをPHPオブジェクトに変換
 
 //$key_ary = Spyc::YAMLLoad('access_key.yml');
