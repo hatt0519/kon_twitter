@@ -81,4 +81,4 @@ if($ban_checker->ban_flg == 1){
 }
 //レスポンスを表示する場合は下記コメントアウトを外す
 //header("Content-Type: application/xml");
-//echo $req;
+echo $req;
