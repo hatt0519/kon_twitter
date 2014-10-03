@@ -132,6 +132,20 @@ class Curl {
 
 		return $response;
 	}
+	function GetWeatherOfShizuoka(){
+		$conn = curl_init();
+
+		$url = 'http://weather.livedoor.com/forecast/webservice/json/v1?city=220010';
+		 
+		curl_setopt($conn, CURLOPT_URL, $url);
+		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
+		 
+		$response = curl_exec($conn);
+		 
+		curl_close($conn);
+
+		return $response;
+	}
 
 }
 
