@@ -27,8 +27,8 @@ $access_token_secret = $access_key->access_token_secret;
 $to = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
 
 $today = new DateTime();
-//$time = $today->format("H時i分");
-$time = "22時00分";
+$time = $today->format("H時i分");
+//$time = "22時00分";
 
 if($ban_checker->ban_flg == 1){
 	$ban = "ごめんね、残念だけど今日は部室の使用禁止なんだ(´・ω・`)";
