@@ -1,8 +1,0 @@
-#Consumer keyの値
-consumer_key: ""
-#Consumer secretの値
-consumer_secret: "" 
-#Access Tokenの値
-access_token: ""
-#Access Token Secretの値
-access_token_secret: ""
