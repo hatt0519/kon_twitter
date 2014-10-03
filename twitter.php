@@ -31,15 +31,15 @@ if($ban_checker->ban_flg == 1){
 	$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$ban));
 }else{
 	$today = new DateTime();
-	//$time = $today->format("H時i分");
-	$time = "08時30分";	
+	$time = $today->format("H時i分");
+	//$time = "08時30分";	
 	switch($time){
 		case "08時30分":
 			$Available_Room = json_decode($Curl->GetAvailableRoom());
 			if(empty($holiday_checker)){
 				$greeting = "軽音のみなさん!!今日は休日日程だから気をつけてね!!1限と3限以外開始時刻が違うよ!!";
 			}else{
-				$num = mt_rand(1,6);
+				$num = mt_rand(1,5);
 				switch($num){
 					case 1;
 						$greeting = "軽音のみなさんおはよう!!今日も一日がんばろうね!!(oﾟ▽ﾟ)o";
@@ -84,9 +84,9 @@ if($ban_checker->ban_flg == 1){
 			$Available_Room = json_decode($Curl->GetAvailableRoom_12_10());
 			break;
 		case "14時30分":
+			$Available_Room = json_decode($Curl->GetAvailableRoom_14_30());
 			$announce = "こんにちは軽音のみなさん！！".$time."現在の部室の空き状況を教えるね！！";
 			$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
-			$Available_Room = json_decode($Curl->GetAvailableRoom_14_30());
 			break;
 		case "16時10分":
 			$Available_Room = json_decode($Curl->GetAvailableRoom_16_10());
