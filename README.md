@@ -10,3 +10,5 @@ kon_twitter
 -これをもとにtwitterAPIを通じて投稿するためのkeyを管理するaccess_key.jsonを作成する。
 -access_key.jsonを作成したらtwitter.phpにて読み込まれる。
 -基本的に""の中に各種keyを記入する。
+#Weather.class.php
+-気象情報を参照するクラス。
