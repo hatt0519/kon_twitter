@@ -135,7 +135,7 @@ class Curl {
 	function GetWeatherOfShizuoka(){
 		$conn = curl_init();
 
-		$url = 'http://weather.livedoor.com/forecast/webservice/json/v1?city=220010';
+		$url = 'http://www.drk7.jp/weather/xml/22.xml';
 		 
 		curl_setopt($conn, CURLOPT_URL, $url);
 		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
@@ -151,7 +151,21 @@ class Curl {
 		$conn = curl_init();
 
 		//$url = 'http://v157-7-235-60.z1d6.static.cnode.jp/ban_checker_next_day.json';
-		$url = '172.20.10.10/ban_checker_next_day.json';
+		$url = '192.168.0.7/ban_checker_next_day.json';
+		curl_setopt($conn, CURLOPT_URL, $url);
+		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
+		 
+		$response = curl_exec($conn);
+		 
+		curl_close($conn);
+
+		return $response;
+	}
+	function GetWarnOfShizuoka(){
+		$conn = curl_init();
+
+		$url = 'http://weather.livedoor.com/forecast/rss/warn/22.xml';
+		 
 		curl_setopt($conn, CURLOPT_URL, $url);
 		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
 		 
