@@ -149,7 +149,7 @@ if($ban_checker->ban_flg == 1){
 			}
 		}
 	}elseif(empty($Available_Room)){
-		$message = "ごめんね、".$time."現在、空いてる部室ないんだ。みんな練習がんばってるね！！";
+		$message = "ごめんね、".$time."現在、空いてる部室はないんだ。";
 		$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 	}
 }
