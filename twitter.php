@@ -62,7 +62,7 @@ if($ban_checker->ban_flg == 1){
 					sleep(3);
 				}
 			}else{
-				$message = "ごめんね、".$time."現在、空いてる部室ないんだ。みんな練習がんばってるね！！";
+				$message = "ごめんね、".$time."現在、空いてる部室はないんだ。";
 				$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 			}
 			break;
@@ -102,7 +102,7 @@ if($ban_checker->ban_flg == 1){
 			$Available_Room = "以上、妹の天気予報でした!";
 			$message = "本日の天気予報ヽ(*´∀｀*)ノ";
 			$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
-			$weather = $Weather->MakeWeatherMessage();
+			$weather = $Weather->MakeWeatherMessageToday();
 			$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$weather));
 			$warn = $Weather->MakeWarnMessage();
 			$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$warn));
@@ -132,6 +132,13 @@ if($ban_checker->ban_flg == 1){
 			$Available_Room = json_decode($Curl->GetNextDay());
 			$announce = "こんばんは軽音のみなさん！！明日の部室の空き状況を教えるね！！";
 			$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
+			break;
+		case "22時30分":
+			$Available_Room = "以上、妹の天気予報でした!";
+			$message = "明日の天気予報ヽ(*´∀｀*)ノ";
+			$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
+			$weather = $Weather->MakeWeatherMessageNextday();
+			$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$weather));
 			break;
 	}
 	if($ban_checker_next->ban_flg == 1){

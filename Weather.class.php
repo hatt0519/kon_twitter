@@ -15,19 +15,32 @@ class Weather extends Curl{
 	private $message;
 	private $announce;
 
-	function Weather() {
+	function __construct() {
 	 	$this->Curl = new Curl();
     }
 
-	function MakeWeatherMessage(){
+	function MakeWeatherMessageToday(){
 		$message = simplexml_load_string($this->GetWeatherOfShizuoka());
 		$weather = "本日の県大周辺の天気は".$message->pref->area[0]->info[0]->weather."\n";
-		$temperature_min = "最高気温は".$message->pref->area[0]->info[0]->temperature->range[1]."℃\n";
-		$temperature_max = "最低気温は".$message->pref->area[0]->info[0]->temperature->range[0]."℃\n";
+		$temperature_min = "最高気温は".$message->pref->area[0]->info[0]->temperature->range[0]."℃\n";
+		$temperature_max = "最低気温は".$message->pref->area[0]->info[0]->temperature->range[1]."℃\n";
 		$rainfallchance = "降水確率\n";
 		$rainfallchance_1 = "06-12時は".$message->pref->area[0]->info[0]->rainfallchance->period[1]."%\n";
 		$rainfallchance_2 = "12-18時は".$message->pref->area[0]->info[0]->rainfallchance->period[2]."%\n";
 		$rainfallchance_3 = "18-24時は".$message->pref->area[0]->info[0]->rainfallchance->period[3]."%です\n";
+
+		$announce = $weather.$temperature_max.$temperature_min.$rainfallchance.$rainfallchance_1.$rainfallchance_2.$rainfallchance_3;
+		return $announce;
+	}
+	function MakeWeatherMessageNextday(){
+		$message = simplexml_load_string($this->GetWeatherOfShizuoka());
+		$weather = "明日の県大周辺の天気は".$message->pref->area[0]->info[1]->weather."\n";
+		$temperature_min = "最高気温は".$message->pref->area[0]->info[1]->temperature->range[0]."℃\n";
+		$temperature_max = "最低気温は".$message->pref->area[0]->info[1]->temperature->range[1]."℃\n";
+		$rainfallchance = "降水確率\n";
+		$rainfallchance_1 = "06-12時は".$message->pref->area[0]->info[1]->rainfallchance->period[1]."%\n";
+		$rainfallchance_2 = "12-18時は".$message->pref->area[0]->info[1]->rainfallchance->period[2]."%\n";
+		$rainfallchance_3 = "18-24時は".$message->pref->area[0]->info[1]->rainfallchance->period[3]."%です\n";
 
 		$announce = $weather.$temperature_max.$temperature_min.$rainfallchance.$rainfallchance_1.$rainfallchance_2.$rainfallchance_3;
 		return $announce;
