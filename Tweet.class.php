@@ -1,5 +1,11 @@
 <?php
 
+/* Tweet.class.php
+ * Author KazukiHatori
+ * Email:moroku0519@gmail.com
+ * PHP verion 5.4.30
+ */
+
 require_once("twitteroauth.php"); //twitteroauth.phpのパス。同一ディレクトリにOAuth.phpも設置する
 require_once('Weather.class.php');
 

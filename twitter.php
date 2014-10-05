@@ -1,4 +1,11 @@
 <?php
+
+/* twitter.php
+ * Author KazukiHatori
+ * Email:moroku0519@gmail.com
+ * PHP verion 5.4.30
+ */
+
 require_once("Tweet.class.php");
 require_once("Curl.class.php");
 

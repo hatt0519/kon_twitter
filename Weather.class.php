@@ -1,5 +1,11 @@
 <?php
 
+/* Weather.class.php
+ * Author KazukiHatori
+ * Email:moroku0519@gmail.com
+ * PHP verion 5.4.30
+ */
+
 require_once("Curl.class.php");
 
 class Weather extends Curl{
