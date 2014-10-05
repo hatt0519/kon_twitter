@@ -175,6 +175,20 @@ class Curl {
 
 		return $response;
 	}
+	function GetTrainInfo(){
+		$conn = curl_init();
+
+		$url = 'https://rti-giken.jp/fhc/api/train_tetsudo/delay.json';
+		 
+		curl_setopt($conn, CURLOPT_URL, $url);
+		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
+		 
+		$response = curl_exec($conn);
+		 
+		curl_close($conn);
+
+		return $response;
+	}
 
 }
 

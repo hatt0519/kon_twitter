@@ -10,6 +10,7 @@ $holiday_checker = json_decode($Curl->GetholidayChecker());
 $ban_checker = json_decode($Curl->GetbanChecker());
 $next_day_schedule = json_decode($Curl->GetNextDay());
 $weather = json_decode($Curl->GetWeatherOfShizuoka());
+$train = json_decode($Curl->GetTrainInfo());
 
 $json = file_get_contents(dirname(__FILE__).DIRECTORY_SEPARATOR."./access_key.json");
 $access_key = json_decode($json); //jsonファイルをPHPオブジェクトに変換
@@ -66,6 +67,14 @@ if($ban_checker->ban_flg == 1){
 				$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 			}
 			break;
+	}
+	foreach ($train as $key => $value) {
+		if($value->name == "東海道本線"){
+			$announce = $value->name."に遅れが発生しています。\n詳しくはhttp://jr-central.co.jp/";
+		}
+	}
+	if(isset($announce)){
+		$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 	}
 }else{
 	switch($time){
@@ -159,6 +168,15 @@ if($ban_checker->ban_flg == 1){
 		$message = "ごめんね、".$time."現在、空いてる部室はないんだ。";
 		$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 	}
+	foreach ($train as $key => $value) {
+				if($value->name == "東海道本線"){
+					$announce = $time."現在、".$value->name."に遅延が発生しています。\n詳しくはhttp://jr-central.co.jp/";
+				}
+			}
+	if(isset($announce)){
+		$req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
+	}
+		
 }
 //レスポンスを表示する場合は下記コメントアウトを外す
 //header("Content-Type: application/xml");
