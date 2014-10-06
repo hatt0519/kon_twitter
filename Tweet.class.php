@@ -78,7 +78,7 @@ class Tweet extends Weather{
 		if(empty($holiday_checker)){
 			$announce = "軽音のみなさん!!今日は休日日程だから気をつけてね!!1限と3限以外開始時刻が違うよ!!";
 		}else{
-			$num = mt_rand(1,6);
+			$num = mt_rand(1,5);
 			switch($num){
 				case 1;
 					$announce = "軽音のみなさんおはよう!!今日も一日がんばろうね!!(oﾟ▽ﾟ)o";
