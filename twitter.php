@@ -15,49 +15,45 @@ $train = json_decode($Tweet->GetTrainInfo());
 $ban_checker = json_decode($Tweet->GetbanChecker());
 
 $today = new DateTime();
-$time = $today->format("H時i分");
-//$time = "22時30分";
+//$time = $today->format("H時i分");
+$time = "08時00分";
+$Tweet->set_Time($time);
+$Tweet->set_Train($train);
 if($ban_checker->ban_flg == 1){
-	switch ($time){
+	switch ($Tweet->get_Time()){
 		case "08時00分":
 			$Tweet->TweetBan();
-			$Tweet->WeatherNews($time);
-			$Tweet->TweetTrainInfo($train,$time);
+			$Tweet->WeatherNews($Tweet->get_Time());
 			break;
 		case "22時00分":
-			$Tweet->TweetAvailableRoomNextDay($time);
-			$Tweet->TweetTrainInfo($train,$time);
+			$Tweet->TweetAvailableRoomNextDay($Tweet->get_Time());
 			break;
 		case "22時30分":
-			$Tweet->WeatherNews($time);
-			$Tweet->TweetTrainInfo($train,$time);
+			$Tweet->WeatherNews($Tweet->get_Time());
 			break;
 		default:
 			break;
 	}
 }else{
-	switch ($time){
+	switch ($Tweet->get_Time()){
 		case "08時00分":
 			$holiday_checker = json_decode($Tweet->GetholidayChecker());
+			$Tweet->set_Holiday_Checker($holiday_checker);
 			$Tweet->TweetMorningMessage($holiday_checker);
-			$Tweet->TweetAvailableRoomToday($time);
-			$Tweet->TweetTrainInfo($train,$time);
+			$Tweet->TweetAvailableRoomToday($Tweet->get_Time());
 			break;
 		case "08時30分":
-			$Tweet->WeatherNews($time);
-			$Tweet->TweetTrainInfo($train,$time);
+			$Tweet->WeatherNews($Tweet->get_Time());
 			break;
 		case "22時00分":
-			$Tweet->TweetAvailableRoomNextDay($time);
-			$Tweet->TweetTrainInfo($train,$time);
+			$Tweet->TweetAvailableRoomNextDay($Tweet->get_Time());
 			break;
 		case "22時30分":
-			$Tweet->WeatherNews($time);
-			$Tweet->TweetTrainInfo($train,$time);
+			$Tweet->WeatherNews($Tweet->get_Time());
 			break;
 		default:
-			$Tweet->TweetAvailableRoomToday($time);
-			$Tweet->TweetTrainInfo($train,$time);
+			$Tweet->TweetAvailableRoomToday($Tweet->get_Time());
 			break;
 	}
 }
+$Tweet->TweetTrainInfo($Tweet->get_Train(),$Tweet->get_Time());

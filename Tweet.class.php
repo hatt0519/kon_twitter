@@ -30,6 +30,15 @@ class Tweet extends Weather{
 	private $warn;
 	private $ban_flg;
 
+	//setter
+	public function set_Time($time){ $this->time = $time; }
+	public function set_Holiday_Checker($holiday_checker){ $this->holiday_checker = $holiday_checker; }
+	public function set_Train($train){ $this->train = $train; }
+	//getter
+	public function get_Time(){ return $this->time; }
+	public function get_Holiday_Checker(){ return $this->holiday_checker; }
+	public function get_Train(){ return $this->train; }
+
 	function __construct(){
 		$json = file_get_contents(dirname(__FILE__).DIRECTORY_SEPARATOR."./access_key.json");
 		$access_key = json_decode($json); //jsonファイルをPHPオブジェクトに変換
