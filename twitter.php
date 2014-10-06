@@ -16,7 +16,7 @@ $ban_checker = json_decode($Tweet->GetbanChecker());
 
 $today = new DateTime();
 $time = $today->format("H時i分");
-//$time = "08時00分";
+//$time = "14時30分";
 $Tweet->set_Time($time);
 $Tweet->set_Train($train);
 if($ban_checker->ban_flg == 1){
