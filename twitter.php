@@ -57,3 +57,4 @@ if($ban_checker->ban_flg == 1){
 	}
 }
 $Tweet->TweetTrainInfo($Tweet->get_Train(),$Tweet->get_Time());
+echo "つぶやき完了ヾ(*・∀・)/";
