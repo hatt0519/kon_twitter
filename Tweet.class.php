@@ -58,7 +58,7 @@ class Tweet extends Weather{
 	}
 
 	function TweetBan(){
-		$announce = "ごめんね、残念だけど部室の使用禁止なんだ(´・ω・`)";
+		$announce = "ごめんね、残念だけど部室の使用禁止なんです(´・ω・`)";
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));	
 	}
 
@@ -79,13 +79,13 @@ class Tweet extends Weather{
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$weather));
 				break;
 		}
-		$end = "以上、妹の天気予報でした!";
+		$end = "以上、あずにゃんの天気予報でした!";
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$end));
 	}
 
 	function TweetMorningMessage($holiday_checker){
 		if(empty($holiday_checker)){
-			$announce = "軽音のみなさん!!今日は休日日程だから気をつけてね!!1限と3限以外開始時刻が違うよ!!";
+			$announce = "先輩!!今日は休日日程だから気をつけてください!!1限と3限以外開始時刻が違います!!";
 		}else{
 			$num = mt_rand(1,5);
 			switch($num){
