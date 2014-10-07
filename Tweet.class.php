@@ -90,16 +90,16 @@ class Tweet extends Weather{
 			$num = mt_rand(1,5);
 			switch($num){
 				case 1;
-					$announce = "軽音のみなさんおはよう!!今日も一日がんばろうね!!(oﾟ▽ﾟ)o";
+					$announce = "先輩おはようございます!!今日も一日がんばりましょう!!(oﾟ▽ﾟ)o";
 					break;
 				case 2;
-					$announce = "軽音のみなさんおはよう!!ライブに向けてファイトだよ!!ヽ(*´∀｀)ﾉ";
+					$announce = "先輩おはようございます!!ライブに向けてファイトです!!ヽ(*´∀｀)ﾉ";
 					break;
 				case 3;
 					$announce = "ふああ。。。おは。。。おはようございます。。。Oo｡(｡p ω-｡)zzz";
 					break;
 				case 4;
-					$announce = "にっこにっこにー!!";
+					$announce = "にゃー!!(●ↀωↀ●)✧";
 					break;
 				case 5;
 					$announce = "練習は進んでいますか?気を引き締めていきましょう!!(｀・ω・´)";
@@ -115,40 +115,40 @@ class Tweet extends Weather{
 				$Available_Room = json_decode($this->GetAvailableRoom());
 				break;
 			case "12時10分":
-				$announce = "お昼の時間になりました（●´▽｀●）".$time."現在の部室の空き状況を教えるね！！";
+				$announce = "お昼の時間になりました（●´▽｀●）".$time."現在の部室の空き状況を教えます！！";
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 				$Available_Room = json_decode($this->GetAvailableRoom_12_10());
 				break;
 			case "14時30分":
-				$announce = "こんにちは軽音のみなさん！！".$time."現在の部室の空き状況を教えるね！！";
+				$announce = "こんにちは先輩！！".$time."現在の部室の空き状況を教えます！！";
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 				$Available_Room = json_decode($this->GetAvailableRoom_14_30());
 				break;
 			case "16時10分":
-				$announce = "こんにちは軽音のみなさん！！".$time."現在の部室の空き状況を教えるね！！";
+				$announce = "こんにちは先輩！！".$time."現在の部室の空き状況を教えます！！";
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 				$Available_Room = json_decode($this->GetAvailableRoom_16_10());
 				break;
 			case "17時50分":
-				$announce = "こんばんは軽音のみなさん！！".$time."現在の部室の空き状況を教えるね！！";
+				$announce = "こんばんは先輩！！".$time."現在の部室の空き状況を教えます！！";
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 				$Available_Room = json_decode($this->GetAvailableRoom_17_50());
 				break;
 		}
 		if(!empty($Available_Room)){
 			foreach($Available_Room as $key => $value){
-				$message = $time."現在、".$value->period."限の".$value->room."室が空いてるよ！！\n予約はこちらからしてね！！http://www.kendai-kon.info/list.cgi?week_id=".$value->week_id;
+				$message = $time."現在、".$value->period."限の".$value->room."室が空いてます！！\n予約はこちらからお願いしますね！！http://www.kendai-kon.info/list.cgi?week_id=".$value->week_id;
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 				sleep(3);
 			}
 		}elseif(empty($Available_Room)){
-			$message = "ごめんね、".$time."現在、空いてる部室はないんだ。";
+			$message = "ごめんなさい、".$time."現在、空いてる部室はありません。";
 			$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 		}
 	}
 
 	function TweetAvailableRoomNextDay($time){
-		$announce = "こんばんは軽音のみなさん！！明日の部室の空き状況を教えるね！！";
+		$announce = "こんばんは先輩！！明日の部室の空き状況を教えます！！";
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 		$Available_Room = json_decode($this->GetNextDay());
 		$ban_flg = json_decode($this->GetbanCheckerNext());
@@ -156,12 +156,12 @@ class Tweet extends Weather{
 			$this->TweetBan();
 		}elseif(!empty($Available_Room)){
 			foreach($Available_Room as $key => $value){
-				$message = $time."現在、".$value->period."限の".$value->room."室が空いてるよ！！\n予約はこちらからしてね！！http://www.kendai-kon.info/list.cgi?week_id=".$value->week_id;
+				$message = $time."現在、".$value->period."限の".$value->room."室が空いてます！！\n予約はこちらからお願いしますね！！http://www.kendai-kon.info/list.cgi?week_id=".$value->week_id;
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 				sleep(3);
 			}
 		}elseif(empty($Available_Room)){
-			$message = "ごめんね、".$time."現在、空いてる部室はないんだ。";
+			$message = "ごめんなさい、".$time."現在、空いてる部室はありません。";
 			$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 		}
 	}
