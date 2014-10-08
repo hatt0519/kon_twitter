@@ -58,7 +58,7 @@ class Tweet extends Weather{
 	}
 
 	function TweetBan(){
-		$announce = "ごめんね、残念だけど部室の使用禁止なんです(´・ω・`)";
+		$announce = "ごめんね、残念だけど部室の使用禁止なんだ(´・ω・`)";
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));	
 	}
 
@@ -79,30 +79,30 @@ class Tweet extends Weather{
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$weather));
 				break;
 		}
-		$end = "以上、あずにゃんの天気予報でした!";
+		$end = "以上、妹の天気予報でした!";
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$end));
 	}
 
 	function TweetMorningMessage($holiday_checker){
 		if(empty($holiday_checker)){
-			$announce = "先輩!!今日は休日日程だから気をつけてください!!1限と3限以外開始時刻が違います!!";
+			$announce = "おにいちゃん!!今日は休日日程だから気をつけてね!!1限と3限以外開始時刻が違うよ!!";
 		}else{
 			$num = mt_rand(1,5);
 			switch($num){
 				case 1;
-					$announce = "先輩おはようございます!!今日も一日がんばりましょう!!(oﾟ▽ﾟ)o";
+					$announce = "おにいちゃんおはよう!!今日も一日がんばろうね!!(oﾟ▽ﾟ)o";
 					break;
 				case 2;
-					$announce = "先輩おはようございます!!ライブに向けてファイトです!!ヽ(*´∀｀)ﾉ";
+					$announce = "おにいちゃん、起きてる？ヾ(･∀･`o)";
 					break;
 				case 3;
-					$announce = "ふああ。。。おは。。。おはようございます。。。Oo｡(｡p ω-｡)zzz";
+					$announce = "ふああ。。。おは。。。おはよう。。。Oo｡(｡p ω-｡)zzz";
 					break;
 				case 4;
 					$announce = "にゃー!!(●ↀωↀ●)✧";
 					break;
 				case 5;
-					$announce = "練習は進んでいますか?気を引き締めていきましょう!!(｀・ω・´)";
+					$announce = "練習は進んでるかな?気を引き締めていこうね!!(｀・ω・´)";
 					break;
 			}
 		}
@@ -115,40 +115,40 @@ class Tweet extends Weather{
 				$Available_Room = json_decode($this->GetAvailableRoom());
 				break;
 			case "12時10分":
-				$announce = "お昼の時間になりました（●´▽｀●）".$time."現在の部室の空き状況を教えます！！";
+				$announce = "お昼の時間になったよ（●´▽｀●）".$time."現在の部室の空き状況を教えるね！！";
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 				$Available_Room = json_decode($this->GetAvailableRoom_12_10());
 				break;
 			case "14時30分":
-				$announce = "こんにちは先輩！！".$time."現在の部室の空き状況を教えます！！";
+				$announce = "おにいちゃん！！".$time."現在の部室の空き状況を教えるね！！";
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 				$Available_Room = json_decode($this->GetAvailableRoom_14_30());
 				break;
 			case "16時10分":
-				$announce = "こんにちは先輩！！".$time."現在の部室の空き状況を教えます！！";
+				$announce = "おにいちゃん！！".$time."現在の部室の空き状況を教えるね！！";
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 				$Available_Room = json_decode($this->GetAvailableRoom_16_10());
 				break;
 			case "17時50分":
-				$announce = "こんばんは先輩！！".$time."現在の部室の空き状況を教えます！！";
+				$announce = "おにいちゃん！！".$time."現在の部室の空き状況を教えるね！！";
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 				$Available_Room = json_decode($this->GetAvailableRoom_17_50());
 				break;
 		}
 		if(!empty($Available_Room)){
 			foreach($Available_Room as $key => $value){
-				$message = $time."現在、".$value->period."限の".$value->room."室が空いてます！！\n予約はこちらからお願いしますね！！http://www.kendai-kon.info/list.cgi?week_id=".$value->week_id;
+				$message = $time."現在、".$value->period."限の".$value->room."室が空いてるよ！！\n予約はこちらからしてね！！http://www.kendai-kon.info/list.cgi?week_id=".$value->week_id;
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 				sleep(3);
 			}
 		}elseif(empty($Available_Room)){
-			$message = "ごめんなさい、".$time."現在、空いてる部室はありません。";
+			$message = "ごめんなさい、".$time."現在、空いてる部室はないんだ。";
 			$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 		}
 	}
 
 	function TweetAvailableRoomNextDay($time){
-		$announce = "こんばんは先輩！！明日の部室の空き状況を教えます！！";
+		$announce = "おにいちゃん！！明日の部室の空き状況を教えるね！！";
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 		$Available_Room = json_decode($this->GetNextDay());
 		$ban_flg = json_decode($this->GetbanCheckerNext());
@@ -156,12 +156,12 @@ class Tweet extends Weather{
 			$this->TweetBan();
 		}elseif(!empty($Available_Room)){
 			foreach($Available_Room as $key => $value){
-				$message = $time."現在、".$value->period."限の".$value->room."室が空いてます！！\n予約はこちらからお願いしますね！！http://www.kendai-kon.info/list.cgi?week_id=".$value->week_id;
+				$message = $time."現在、".$value->period."限の".$value->room."室が空いてるよ！！\n予約はこちらからしてね！！http://www.kendai-kon.info/list.cgi?week_id=".$value->week_id;
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 				sleep(3);
 			}
 		}elseif(empty($Available_Room)){
-			$message = "ごめんなさい、".$time."現在、空いてる部室はありません。";
+			$message = "ごめんなさい、".$time."現在、空いてる部室はないんだ。";
 			$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 		}
 	}
@@ -169,7 +169,7 @@ class Tweet extends Weather{
 	function TweetTrainInfo($train,$time){
 		foreach ($train as $key => $value) {
 			if($value->name == "東海道本線"){
-				$announce = $time."現在、".$value->name."に遅延が発生しています。\n詳しくはhttp://jr-central.co.jp/";
+				$announce = $time."現在、".$value->name."に遅延が発生しているみたい。\n詳しくはhttp://jr-central.co.jp/";
 			}
 		}
 		if(isset($announce)){
