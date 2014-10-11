@@ -15,3 +15,5 @@ kon_twitter
 
 #Twitter.class.php
 -twitterへの各種投稿を行うクラス。
+
+This software is released under the MIT License, see LICENSE.txt.
