@@ -157,7 +157,7 @@ class Tweet extends Weather{
 
 	function TweetAvailableRoomNextDay($time,$holiday_checker){
 		if(empty($holiday_checker)){
-			$announce = $time."おにいちゃん！！明日は休日日程だから気をつけてね!!\n2限は10:20から\n昼は11:40から\n4限は14:20から\n5限は15:40から開始だよ!!";
+			$announce = "おにいちゃん！！明日は休日日程だから気をつけてね!!\n2限は10:20から\n昼は11:40から\n4限は14:20から\n5限は15:40から開始だよ!!";
 		}else{
 			$announce = "おにいちゃん！！明日の部室の空き状況を教えるね！！";
 		}
