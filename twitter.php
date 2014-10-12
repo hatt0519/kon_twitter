@@ -16,7 +16,7 @@ $ban_checker = json_decode($Tweet->GetbanChecker());
 
 $today = new DateTime();
 $time = $today->format("H時i分");
-$time = "22時02分";
+//$time = "22時02分";
 $Tweet->set_Time($time);
 $Tweet->set_Train($train);
 if($ban_checker->ban_flg == 1){
@@ -45,7 +45,7 @@ if($ban_checker->ban_flg == 1){
 		case "08時30分":
 			$Tweet->WeatherNews($Tweet->get_Time());
 			break;
-		case "22時02分":
+		case "22時00分":
 			$Tweet->TweetAvailableRoomNextDay($Tweet->get_Time(),$holiday_checker);
 			break;
 		case "22時30分":
