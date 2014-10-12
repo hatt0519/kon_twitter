@@ -85,7 +85,7 @@ class Tweet extends Weather{
 
 	function TweetMorningMessage($holiday_checker){
 		if(empty($holiday_checker)){
-			$announce = "おにいちゃん!!今日は休日日程だから気をつけてね!!1限と3限以外開始時刻が違うよ!!";
+			$announce = "おにいちゃん!!今日は休日日程だから気をつけてね!!\n2限は10:20から、昼は11:40から開始だよ!!";
 		}else{
 			$num = mt_rand(1,5);
 			switch($num){
@@ -109,18 +109,26 @@ class Tweet extends Weather{
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 	}
 
-	function TweetAvailableRoomToday($time){
+	function TweetAvailableRoomToday($time,$holiday_checker){
 		switch ($time) {
 			case "08時00分":
 				$Available_Room = json_decode($this->GetAvailableRoom());
 				break;
 			case "12時10分":
-				$announce = "お昼の時間になったよ（●´▽｀●）".$time."現在の部室の空き状況を教えるね！！";
+				if(empty($holiday_checker)){
+					$announce = "おにいちゃん、今日は4限が14:20から、5限が15:40から開始だから気をつけてね!!";
+				}else{
+					$announce = "お昼の時間になったよ（●´▽｀●）".$time."現在の部室の空き状況を教えるね！！";
+				}
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 				$Available_Room = json_decode($this->GetAvailableRoom_12_10());
 				break;
 			case "14時30分":
-				$announce = "おにいちゃん！！".$time."現在の部室の空き状況を教えるね！！";
+				if(empty($holiday_checker)){
+					$announce = "おにいちゃん、今日は5限が15:40から開始だから気をつけてね!!";
+				}else{
+					$announce = "おにいちゃん！！".$time."現在の部室の空き状況を教えるね！！";
+				}
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 				$Available_Room = json_decode($this->GetAvailableRoom_14_30());
 				break;
@@ -147,8 +155,12 @@ class Tweet extends Weather{
 		}
 	}
 
-	function TweetAvailableRoomNextDay($time){
-		$announce = "おにいちゃん！！明日の部室の空き状況を教えるね！！";
+	function TweetAvailableRoomNextDay($time,$holiday_checker){
+		if(empty($holiday_checker)){
+			$announce = $time."おにいちゃん！！明日は休日日程だから気をつけてね!!\n2限は10:20から\n昼は11:40から\n4限は14:20から\n5限は15:40から開始だよ!!";
+		}else{
+			$announce = "おにいちゃん！！明日の部室の空き状況を教えるね！！";
+		}
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 		$Available_Room = json_decode($this->GetNextDay());
 		$ban_flg = json_decode($this->GetbanCheckerNext());
