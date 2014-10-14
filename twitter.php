@@ -54,6 +54,7 @@ if($ban_checker->ban_flg == 1){
 			$Tweet->WeatherNews($Tweet->get_Time());
 			break;
 		default:
+			$holiday_checker = json_decode($Tweet->GetholidayChecker());
 			$Tweet->TweetAvailableRoomToday($Tweet->get_Time(),$holiday_checker);
 			break;
 	}
