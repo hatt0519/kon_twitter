@@ -192,7 +192,7 @@ class Tweet extends Weather{
 			$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 		}
 	}
-
+/*
 	function MakeCalendar(){
 		$count = date('d', mktime(0, 0, 0, date('m')+1, 0, date('Y')));
 		$wday = date('w', mktime(0, 0, 0, date('m'), 1, date('Y')));
@@ -206,5 +206,5 @@ class Tweet extends Weather{
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 
 	}
-
+*/
 }
