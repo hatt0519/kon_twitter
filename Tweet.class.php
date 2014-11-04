@@ -149,7 +149,7 @@ class Tweet extends Weather{
 		}
 		if(!empty($Available_Room)){
 			foreach($Available_Room as $key => $value){
-				$message = $time."現在、".$value->period."限の".$value->room."室が空いてるよ！！\n予約はこちらからしてね！！http://www.kendai-kon.info/list.cgi?week_id=".$value->week_id;
+				$message = $time."現在、".$value->period."限の".$value->room."室が空いてるよ！！\n予約はこちらからしてね！！http://www.kendai-kon.info/list.cgi?id=".$value->id."&week_id=".$value->week_id;
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 				sleep(3);
 			}
