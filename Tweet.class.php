@@ -29,6 +29,10 @@ class Tweet extends Weather{
 	private $weather;
 	private $warn;
 	private $ban_flg;
+	private $i;
+	private $count;
+	private $wday;
+	private $rt;
 
 	//setter
 	public function set_Time($time){ $this->time = $time; }
@@ -187,6 +191,20 @@ class Tweet extends Weather{
 		if(isset($announce)){
 			$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 		}
+	}
+
+	function MakeCalendar(){
+		$count = date('d', mktime(0, 0, 0, date('m')+1, 0, date('Y')));
+		$wday = date('w', mktime(0, 0, 0, date('m'), 1, date('Y')));
+
+		$message = str_repeat("\t",$wday);
+		for($i=1;$i<=date('d', mktime(0, 0, 0, date('m')+1, 0, date('Y')));$i++){
+			$message = $message.sprintf("%2d ", $i);
+			$rt = ($i + $wday) % 7 == 0 ? "\n" : " ";
+			$message = $message.$rt;
+		}
+		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
+
 	}
 
 }
