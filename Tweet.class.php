@@ -184,7 +184,7 @@ class Tweet extends Weather{
 
 	function TweetTrainInfo($train,$time){
 		foreach ($train as $key => $value) {
-			if($value->name == "東海道本線"){
+			if(preg_match("/東海道本線/", $value->name)){
 				$announce = $time."現在、".$value->name."に遅延が発生しているみたい。\n詳しくはhttp://jr-central.co.jp/";
 			}
 		}
