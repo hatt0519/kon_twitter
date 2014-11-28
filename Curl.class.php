@@ -16,7 +16,7 @@ class Curl {
 
 		$conn = curl_init();
 
-		$url = 'http://v157-7-235-60.z1d6.static.cnode.jp:4567/available_room.json';
+		$url = 'http://conoha.moroku0519.xyz:4567/available_room.json';
 		 
 		curl_setopt($conn, CURLOPT_URL, $url);
 		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
@@ -32,7 +32,7 @@ class Curl {
 
 		$conn = curl_init();
 
-		$url = 'http://v157-7-235-60.z1d6.static.cnode.jp:4567/available_room_12_10.json';
+		$url = 'http://conoha.moroku0519.xyz:4567/available_room_12_10.json';
 		 
 		curl_setopt($conn, CURLOPT_URL, $url);
 		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
@@ -48,7 +48,7 @@ class Curl {
 
 		$conn = curl_init();
 
-		$url = 'http://v157-7-235-60.z1d6.static.cnode.jp:4567/available_room_14_30.json';
+		$url = 'http://conoha.moroku0519.xyz:4567/available_room_14_30.json';
 		 
 		curl_setopt($conn, CURLOPT_URL, $url);
 		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
@@ -64,7 +64,7 @@ class Curl {
 
 		$conn = curl_init();
 
-		$url = 'http://v157-7-235-60.z1d6.static.cnode.jp:4567/available_room_16_10.json';
+		$url = 'http://conoha.moroku0519.xyz:4567/available_room_16_10.json';
 		 
 		curl_setopt($conn, CURLOPT_URL, $url);
 		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
@@ -80,7 +80,7 @@ class Curl {
 
 		$conn = curl_init();
 
-		$url = 'http://v157-7-235-60.z1d6.static.cnode.jp:4567/available_room_17_50.json';
+		$url = 'http://conoha.moroku0519.xyz:4567/available_room_17_50.json';
 		 
 		curl_setopt($conn, CURLOPT_URL, $url);
 		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
@@ -95,7 +95,7 @@ class Curl {
 
 		$conn = curl_init();
 
-		$url = 'http://v157-7-235-60.z1d6.static.cnode.jp:4567/holiday_checker.json';
+		$url = 'http://conoha.moroku0519.xyz:4567/holiday_checker.json';
 		 
 		curl_setopt($conn, CURLOPT_URL, $url);
 		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
@@ -111,7 +111,7 @@ class Curl {
 
 		$conn = curl_init();
 
-		$url = 'http://v157-7-235-60.z1d6.static.cnode.jp:4567/holiday_checker_nextday.json';
+		$url = 'http://conoha.moroku0519.xyz:4567/holiday_checker_nextday.json';
 		 
 		curl_setopt($conn, CURLOPT_URL, $url);
 		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
@@ -128,7 +128,7 @@ class Curl {
 
 		$conn = curl_init();
 
-		$url = 'http://v157-7-235-60.z1d6.static.cnode.jp:4567/ban_checker.json';
+		$url = 'http://conoha.moroku0519.xyz:4567/ban_checker.json';
 		//$url = '192.168.0.7/ban_checker.json';
 		curl_setopt($conn, CURLOPT_URL, $url);
 		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
@@ -144,7 +144,7 @@ class Curl {
 
 		$conn = curl_init();
 
-		$url = 'http://v157-7-235-60.z1d6.static.cnode.jp:4567/next_day_schedule.json';
+		$url = 'http://conoha.moroku0519.xyz:4567/next_day_schedule.json';
 		 
 		curl_setopt($conn, CURLOPT_URL, $url);
 		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
@@ -173,7 +173,7 @@ class Curl {
 
 		$conn = curl_init();
 
-		$url = 'http://v157-7-235-60.z1d6.static.cnode.jp:4567/ban_checker_next_day.json';
+		$url = 'http://conoha.moroku0519.xyz:4567/ban_checker_next_day.json';
 		//$url = '192.168.0.7/ban_checker_next_day.json';
 		curl_setopt($conn, CURLOPT_URL, $url);
 		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
