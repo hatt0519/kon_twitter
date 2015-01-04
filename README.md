@@ -17,4 +17,7 @@ kon_twitter
 #Twitter.class.php
 -twitterへの各種投稿を行うクラス。
 
+#Sister.class.php
+妹の切り替えを行うクラス。このクラスだけDB接続含む。
+
 This software is released under the MIT License, see LICENSE.txt.
