@@ -377,19 +377,19 @@ class Tweet extends Weather{
 			case 1:
 				$req = $this->tweet->oAuthRequestImage("https://api.twitter.com/1.1/account/update_profile_image.json",array('image'=>'./images/kon_sister.png'));
 				sleep(10);			
-				$message = "おにいちゃん、今日は私がサポートするね!!";
+				$message = "おにいちゃん、メイだよ。今日は私がサポートするね!!";
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 				break;
 			case 2:
 				$req = $this->tweet->oAuthRequestImage("https://api.twitter.com/1.1/account/update_profile_image.json",array('image'=>'./images/kon_sister_2.jpg'));
 				sleep(10);
-				$message = "おにいさん、今日は私がお手伝いしますね!!";
+				$message = "おにいさん、若菜です。今日は私がお手伝いしますね!!";
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 				break;
 			case 3:
 				$req = $this->tweet->oAuthRequestImage("https://api.twitter.com/1.1/account/update_profile_image.json",array('image'=>'./images/kon_sister_3.jpg'));
 				sleep(10);
-				$message = "おにいちゃん、ヤッホー!!今日は私がお手伝いしちゃうよ!!";
+				$message = "おにいちゃん、ヤッホー!!うただよ!!今日は私がお手伝いしちゃうよ!!";
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 				break;
 		}
