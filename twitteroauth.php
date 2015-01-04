@@ -190,7 +190,63 @@ class TwitterOAuth {
    *
    * @return API results
    */
-  function http($url, $method, $postfields = NULL) {
+
+  function oAuthRequestImage($url, $args) {
+    $method = 'POST';
+    if (strrpos($url, 'https://') !== 0 && strrpos($url, 'http://') !== 0) {
+      $url = "{$this->host}{$url}.{$this->format}";
+    }
+    $request = OAuthRequest::from_consumer_and_token($this->consumer, $this->token, $method, $url, array());
+    $request->sign_request($this->sha1_method, $this->consumer, $this->token);
+    
+    $headers = array($request->to_header());
+    
+    if (isset($args['image'])) {
+      if (file_exists($args['image'])) {
+        $binary = file_get_contents($args['image']);
+        $fileInfo = pathinfo($args['image']);
+        $basename = $fileInfo['basename'];
+      } else {
+        $binary = $args['image'];
+        $basename = 'image';
+      }
+      
+      preg_match('/\A(?:(\xff\xd8\xff)|(GIF8[79]a)|(\x89PNG\x0d\x0a))/',
+                 $binary, $matches);
+      
+      switch (count($matches) - 1) {
+        case 1:
+          $mimeType = 'image/jpeg';
+          break;
+        case 2:
+          $mimeType = 'image/gif';
+          break;
+        case 3:
+          $mimeType = 'image/png';
+          break;
+        default:
+          $mimeType = 'application/octet-stream';
+          break;
+      }
+      
+      $boundary = md5(time());
+      $content = '--' . $boundary . "\r\n"
+               . 'Content-Disposition: form-data; name=image; '
+               . 'filename="' . $basename . "\"\r\n"
+               . 'Content-Type: ' . $mimeType . "\r\n"
+               . "\r\n" . $binary . "\r\n"
+               . '--' . $boundary . '--';
+      
+      $headers[] = 'Content-Type: multipart/form-data; boundary=' . $boundary;
+      $headers[] = 'Content-Length: ' . strlen($content);
+      
+      $args = $content;
+    }
+    
+    return $this->http($request->get_normalized_http_url(), $method, $args, $headers);
+  }
+
+  function http($url, $method, $postfields = NULL,$headers = array()) {
     $this->http_info = array();
     $ci = curl_init();
     /* Curl settings */
@@ -198,7 +254,7 @@ class TwitterOAuth {
     curl_setopt($ci, CURLOPT_CONNECTTIMEOUT, $this->connecttimeout);
     curl_setopt($ci, CURLOPT_TIMEOUT, $this->timeout);
     curl_setopt($ci, CURLOPT_RETURNTRANSFER, TRUE);
-    curl_setopt($ci, CURLOPT_HTTPHEADER, array('Expect:'));
+    curl_setopt($ci, CURLOPT_HTTPHEADER, array_merge(array('Expect:'),$headers));
     curl_setopt($ci, CURLOPT_SSL_VERIFYPEER, $this->ssl_verifypeer);
     curl_setopt($ci, CURLOPT_HEADERFUNCTION, array($this, 'getHeader'));
     curl_setopt($ci, CURLOPT_HEADER, FALSE);
