@@ -6,9 +6,9 @@
  * PHP verion 5.4.30
  */
 
-require_once("Tweet.class.php");
-require_once("Curl.class.php");
-require_once("Sister.class.php");
+require_once("./class/Tweet.class.php");
+require_once("./class/Curl.class.php");
+require_once("./class/Sister.class.php");
 
 $Tweet = new Tweet();
 $Sister = new Sister();
@@ -17,7 +17,7 @@ $train = json_decode($Tweet->GetTrainInfo());
 $ban_checker = json_decode($Tweet->GetbanChecker());
 $today = new DateTime();
 $time = $today->format("H時i分");
-//$time = "08時00分";
+//$time = "08時30分";
 
 $sister = $Sister->getSister();
 
