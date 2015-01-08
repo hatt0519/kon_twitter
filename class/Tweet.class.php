@@ -276,7 +276,7 @@ class Tweet extends Weather{
 						$message = $time."現在、".$value->period."限の".$value->room."室が空いてます。\n予約はこちらからお願いしますね。http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
 						break;
 					case 3:
-						$message = $time."現在、".$value->period."限の".$value->room."室が空いるんだ!!\n予約はこっちだよ!!http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
+						$message = $time."現在、".$value->period."限の".$value->room."室が空いてるんだ!!\n予約はこっちだよ!!http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
 						break;
 				}
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
