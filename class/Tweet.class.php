@@ -317,7 +317,7 @@ class Tweet extends Weather{
 		$Available_Room = json_decode($this->GetNextDay());
 		$ban_flg = json_decode($this->GetbanCheckerNext());
 		if($ban_flg->ban_flg == 1){
-			$this->TweetBan();
+			$this->TweetBan($sister);
 		}elseif(!empty($Available_Room)){
 			foreach($Available_Room as $key => $value){
 				switch ($sister->id) {
