@@ -16,8 +16,8 @@ $Sister = new Sister();
 $train = json_decode($Tweet->GetTrainInfo());
 $ban_checker = json_decode($Tweet->GetbanChecker());
 $today = new DateTime();
-$time = $today->format("H時i分");
-//$time = "08時30分";
+//$time = $today->format("H時i分");
+$time = "22時30分";
 
 $sister = $Sister->getSister();
 

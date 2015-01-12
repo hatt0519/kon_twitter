@@ -50,6 +50,9 @@ class Weather extends Curl{
 			case 3:
 				$rainfallchance_3 = "18-24時は".$message->pref->area[0]->info[0]->rainfallchance->period[3]."%だよ！！\n";
 				break;
+			case 4:
+				$rainfallchance_3 = "18-24時は".$message->pref->area[0]->info[0]->rainfallchance->period[3]."%ですわ！！\n";
+				break;
 		}
 		$announce = $weather.$temperature_max.$temperature_min.$rainfallchance.$rainfallchance_1.$rainfallchance_2.$rainfallchance_3;
 		return $announce;
@@ -73,6 +76,9 @@ class Weather extends Curl{
 			case 3:
 				$rainfallchance_3 = "18-24時は".$message->pref->area[0]->info[0]->rainfallchance->period[3]."%だよ！！\n";
 				break;
+			case 4:
+				$rainfallchance_3 = "18-24時は".$message->pref->area[0]->info[0]->rainfallchance->period[3]."%ですわ！！\n";
+				break;
 		}
 		$announce = $weather.$temperature_max.$temperature_min.$rainfallchance.$rainfallchance_1.$rainfallchance_2.$rainfallchance_3;
 		return $announce;
@@ -90,6 +96,9 @@ class Weather extends Curl{
 					break;
 				case 3:
 					$message = $warn->channel->item[1]->description."\nおにいちゃん、気をつけてね。";
+					break;
+				case 4:
+					$message = $warn->channel->item[1]->description."\nおにいさま、お気をつけて。";
 					break;
 			}
 		}else{

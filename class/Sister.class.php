@@ -13,7 +13,14 @@ class Sister {
 	private $access_key;
 	private $dns;
 	private $sister;
+	private $pre_shift;
 	private $dbh;
+
+	public function set_sister($sister){ $this->sister = $sister; }
+	public function set_preShift($pre_shift){$this->pre_shift = $pre_shift; }
+
+	public function get_sister(){ return $this->sister; }
+	public function get_preShift(){ return $this->pre_shift; }
 
 	function __construct(){
 		$json = file_get_contents(dirname(__FILE__).DIRECTORY_SEPARATOR."../config/access_key.json");
@@ -42,20 +49,37 @@ class Sister {
 		return $rs;
 	}
 
-	function registSister(){
-		$sister = mt_rand(1,3);
+	function chooseSister(){
+		$sister = mt_rand(1,4);
 		$pre_shift = $this->confirmPreShift();
-		while ($sister == $pre_shift->id){
-			$sister = mt_rand(1,3);
+		/*
+		switch ($sister) {
+			case 4:
+				$sister = mt_rand() / mt_getrandmax() <= 0.1 ? 4 : mt_rand(1,3);
+				break;
+			default:
+				break;
 		}
+		*/
+		while ($sister == $pre_shift->id){
+			$sister = mt_rand(1,4);
+		}
+		$obj = new Sister();
+		$obj->set_sister($sister);
+		$obj->set_preShift($pre_shift);
+		
+		return $obj;
+	}
 
-		$sql = "UPDATE sisters SET pre_shift_flg = 0 WHERE id = ?";
-		$sth = $this->dbh->prepare($sql);
-		$sth->execute(array($pre_shift->id));
-
-		$sql = "UPDATE sisters SET shift_flg = 1 WHERE id = ?";
-		$sth = $this->dbh->prepare($sql);
-		$sth->execute(array($sister));
+	function registSister(){
+		$sister = $this->chooseSister();
+		$sql_ary = array("UPDATE sisters SET pre_shift_flg = 0 WHERE id = ?","UPDATE sisters SET shift_flg = 1 WHERE id = ?");
+		$counter = 0;
+		foreach ($sql_ary as $key => $sql) {
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute($counter == 0 ? array($sister->get_preShift()->id) : array($sister->get_sister()));
+			$counter++;
+		}
 	}
 
 	function getSister(){
