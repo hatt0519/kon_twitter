@@ -34,7 +34,6 @@ class Tweet extends Weather{
 	private $wday;
 	private $rt;
 	private $sister;
-	private $char;
 
 	//setter
 	public function set_Time($time){ $this->time = $time; }
@@ -72,11 +71,12 @@ class Tweet extends Weather{
 				$announce = "ごめんね、残念だけど部室の使用禁止なんだ(´・ω・`)";
 				break;
 			case 2:
-				$char = mt_rand(1,100);
-				$announce = $char <= 20 ? "今日、部室の使用禁止なんです。。。でもこれで私と一緒にいてくれますよね。。。？ねえ、おにいさん。。。" : "おにいさん。。。部室の使用禁止なんです。。。ごめんなさい(´; ω ;｀)";
+				$announce =  mt_rand() / mt_getrandmax() <= 0.2 ? "今日、部室の使用禁止なんです。。。でもこれで私と一緒にいてくれますよね。。。？ねえ、おにいさん。。。" : "おにいさん。。。部室の使用禁止なんです。。。ごめんなさい(´; ω ;｀)";
 				break;
 			case 3:
 				$announce = "ごめんおにいちゃん！！今日は部室が使えないんだ！！(＝ω＝.)\n(*´・∀・)あ!!じゃあさ、じゃあさ、あたしと遊ぼ!!!";
+			case 4:
+				$announce = "ごめんなさいおにいさま、本日は部室が使えませんの。。。"
 		}
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));	
 	}
@@ -95,8 +95,12 @@ class Tweet extends Weather{
 						break;
 					case 3:
 						$message = "今日の天気だよ！！(*｀･ω･)ゞ";
-					$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
+						break;
+					case 4:
+						$message = "本日の天気予報ですわ(๑˃́ꇴ˂̀๑)";
+						break;
 				}
+				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 				$weather = $this->MakeWeatherMessageToday($sister);
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$weather));
 				$warn = $this->MakeWarnMessage($sister);
@@ -112,8 +116,12 @@ class Tweet extends Weather{
 						break;
 					case 3:
 						$message = "明日の天気だよ！！(*｀･ω･)ゞ";
-					$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
+						break;
+					case 4:
+						$message = "本日の天気予報ですわ(๑˃́ꇴ˂̀๑)";
+						break;
 				}
+				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 				$weather = $this->MakeWeatherMessageNextday($sister);
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$weather));
@@ -121,22 +129,24 @@ class Tweet extends Weather{
 		}
 		switch ($sister->id) {
 			case 1:
-				$end = "以上、妹の天気予報でした!";
+				$end = "以上、メイの天気予報でした!";
 				break;
 			case 2:
-				$char = mt_rand(1,100);
-				$end = $char <= 20 ? "以上、妹の天気予報でした。ところでおにいさん、この前相合い傘してた人って。。。誰ですか。。。？" : "以上、妹の天気予報でした。おにいさん、天気予報はこまめにチェックしなきゃ。。。ですよ？ふふ。";
+				$end = mt_rand() / mt_getrandmax() <= 0.2 ? "以上、若菜の天気予報でした。ところでおにいさん、この前相合い傘してた人って。。。誰ですか。。。？" : "以上、若菜の天気予報でした。おにいさん、天気予報はこまめにチェックしなきゃ。。。ですよ？ふふ。";
 				break;
 			case 3:
 				switch ($time) {
 					case "08時30分":
-						$end = "以上、妹の天気予報でした！ほら！早く起きなよ！！( ｀ ・ ω ・´ )";
+						$end = "以上、若菜の天気予報でした！ほら！早く起きなよ！！( ｀ ・ ω ・´ )";
 						break;
 					case "22時30分":
-						$end = "以上、妹の天気予報でした！おにいちゃん、夜更かしはほどほどにね！";
+						$end = "以上、若菜の天気予報でした！おにいちゃん、夜更かしはほどほどにね！";
 						break;
 				break;
-			}
+				}
+			case 4:
+				$end = "以上、リナの天気予報でしたの!!おにいさま、お気を付けていってらっしゃいませ!!";
+				break;
 		}
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$end));
 	}
@@ -154,6 +164,10 @@ class Tweet extends Weather{
 					break;
 				case 3:
 					$announce = "おにいちゃん!!今日は休日日程だから気をつけなよ!!\n2限は10:20から、昼は11:40から開始なんだからね!!練習終わったら、あたしと遊んでね!!";
+					break;
+				case 4:
+					$announce = "おにいさま!!本日は休日日程ですのでお気をつけてくださいませ\n2限は10:20から、昼は11:40から開始ですわ。";
+					break;
 			}
 		}else{
 			$num = mt_rand(1,5);
@@ -215,6 +229,25 @@ class Tweet extends Weather{
 							break;
 					}
 					break;
+				case 4:
+					switch($num){
+						case 1;
+							$announce = "おにいさまおはようございます。今日も一日がんばりますわよ!!(oﾟ▽ﾟ)o";
+							break;
+						case 2;
+							$announce = "おにいさま、そろそろ起きてくださいですわ。";
+							break;
+						case 3;
+							$announce = "おにいさま、お目覚めのじかんですわよ。。。？";
+							break;
+						case 4;
+							$announce = "お・に・い・さ・ま";
+							break;
+						case 5;
+							$announce = "今日も練習がんばってください、ですわ(｀・ω・´)";
+							break;
+					}
+					break;
 			}
 		}
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
@@ -237,7 +270,11 @@ class Tweet extends Weather{
 						$announce = !empty($holiday_checker) ? "お昼の時間になりました（●´▽｀●）".$time."現在の部室の空き状況です！！" : "おにいさん、今日は4限が14:20から、5限が15:40から開始なので気をつけてくださいね!!";
 						break;
 					case 3:
-						$announce = !empty($holiday_checker) ? "お昼の時間になったね（●´▽｀●）".$time."現在の部室の空き状況だよ！！" : "おにいちゃん、今日は4限が14:20から、5限が15:40から開始だから気をつけなきゃだね!!"; 
+						$announce = !empty($holiday_checker) ? "お昼の時間になったね（●´▽｀●）".$time."現在の部室の空き状況だよ！！" : "おにいちゃん、今日は4限が14:20から、5限が15:40から開始だから気をつけなきゃだね!!";
+						break;
+					case 4:
+						$announce = !empty($holiday_checker) ? "お昼の時間になりましたわ（●´▽｀●）".$time."現在の部室の空き状況ですわ！！" : "おにいさま、本日は4限が14:20から、5限が15:40から開始ですのでお気をつけくださいませ!!";
+						break;
 				}
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 				$Available_Room = json_decode($this->GetAvailableRoom_12_10());
@@ -252,6 +289,10 @@ class Tweet extends Weather{
 						break;
 					case 3:
 						$announce = !empty($holiday_checker) ? "おにいちゃん、".$time."現在の部室の空き状況だよ！！" : "おにいちゃん、今日は5限が15:40から開始なので気をつけなきゃだね!!";
+						break;
+					case 4:
+						$announce = !empty($holiday_checker) ? "おにいさま、".$time."現在の部室の空き状況ですわ！！" : "おにいさま、本日は5限が15:40から開始ですのでお気をつけくださいませ!!";
+						break;
 				}
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
 				switch ($time) {
@@ -278,6 +319,9 @@ class Tweet extends Weather{
 					case 3:
 						$message = $time."現在、".$value->period."限の".$value->room."室が空いてるんだ!!\n予約はこっちだよ!!http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
 						break;
+					case 4:
+						$message = $time."現在、".$value->period."限の".$value->room."室が空いていますわ。\nご予約はこちらですわ。http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
+						break;
 				}
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 				sleep(3);
@@ -292,6 +336,9 @@ class Tweet extends Weather{
 					break;
 				case 3:
 					$message = "ごめんね、".$time."現在、空いてる部室はないんだ。";
+					break;
+				case 4:
+					$message = "ごめんなさいですわ、".$time."現在、空いてる部室はありませんの。";
 					break;
 			}
 			$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
@@ -310,7 +357,10 @@ class Tweet extends Weather{
 				$announce = !empty($holiday_checker) ? "おにいさん、明日の部室の空き状況です。" : "おにいさん、明日は休日日程ですよ〜。\n2限は10:20から\n昼は11:40から\n4限は14:20から\n5限は15:40から開始ですからね!!";				
 				break;
 			case 3:
-				$announce = !empty($holiday_checker) ? "おにいちゃん、明日の部室の空き状況だよ!!" : "おにいさん、明日は休日日程だからね!!\n2限は10:20から\n昼は11:40から\n4限は14:20から\n5限は15:40から開始だからね!!";				
+				$announce = !empty($holiday_checker) ? "おにいちゃん、明日の部室の空き状況だよ!!" : "おにいちゃん、明日は休日日程だからね!!\n2限は10:20から\n昼は11:40から\n4限は14:20から\n5限は15:40から開始だからね!!";				
+				break;
+			case 4:
+				$announce = !empty($holiday_checker) ? "おにいさま、明日の部室の空き状況ですわ。" : "おにいさま、明日は休日日程ですわ。\n2限は10:20から\n昼は11:40から\n4限は14:20から\n5限は15:40から開始ですわ。";				
 				break;
 		}
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));
@@ -330,6 +380,9 @@ class Tweet extends Weather{
 					case 3:
 						$message = $time."現在、".$value->period."限の".$value->room."室が空いてるんだ!!\n予約はこっちだよ!!http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
 						break;
+					case 4:
+						$message = $time."現在、".$value->period."限の".$value->room."室が空いていますわ。\nご予約はこちらですわ。http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
+						break;
 				}
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 				sleep(3);
@@ -344,6 +397,9 @@ class Tweet extends Weather{
 					break;
 				case 3:
 					$message = "ごめんね、".$time."現在、空いてる部室はないんだ。";
+					break;
+				case 4:
+					$message = "ごめんなさいですわ、".$time."現在、空いてる部室はありませんの。";
 					break;
 			}
 			$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
@@ -365,6 +421,9 @@ class Tweet extends Weather{
 						break;
 					case 3:
 						$announce = $time."現在、".$value->name."に遅延が発生しているみたいだね。\n詳しくはhttp://jr-central.co.jp/";
+						break;
+					case 4:
+						$announce = $time."現在、".$value->name."に遅延が発生しているみたいですわ。\n詳しくはhttp://jr-central.co.jp/";
 						break;
 				}
 			}
@@ -390,6 +449,12 @@ class Tweet extends Weather{
 				$req = $this->tweet->oAuthRequestImage("https://api.twitter.com/1.1/account/update_profile_image.json",array('image'=>'./images/kon_sister_3.jpg'));
 				sleep(10);
 				$message = "おにいちゃん、ヤッホー!!うただよ!!今日は私がお手伝いしちゃうよ!!";
+				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
+				break;
+			case 4:
+				$req = $this->tweet->oAuthRequestImage("https://api.twitter.com/1.1/account/update_profile_image.json",array('image'=>'./images/kon_sister_4.jpg'));
+				sleep(10);
+				$message = "ごきげんようおにいさま!!本日は私、リナが担当いたします。";
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
 				break;
 		}
