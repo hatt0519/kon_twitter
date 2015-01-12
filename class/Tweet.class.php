@@ -75,8 +75,10 @@ class Tweet extends Weather{
 				break;
 			case 3:
 				$announce = "ごめんおにいちゃん！！今日は部室が使えないんだ！！(＝ω＝.)\n(*´・∀・)あ!!じゃあさ、じゃあさ、あたしと遊ぼ!!!";
+				break;
 			case 4:
-				$announce = "ごめんなさいおにいさま、本日は部室が使えませんの。。。"
+				$announce = "ごめんなさいおにいさま、本日は部室が使えませんの。。。";
+				break;
 		}
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));	
 	}
