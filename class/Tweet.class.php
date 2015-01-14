@@ -120,7 +120,7 @@ class Tweet extends Weather{
 						$message = "明日の天気だよ！！(*｀･ω･)ゞ";
 						break;
 					case 4:
-						$message = "本日の天気予報ですわ(๑˃́ꇴ˂̀๑)";
+						$message = "明日の天気予報ですわ(๑˃́ꇴ˂̀๑)";
 						break;
 				}
 				$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
@@ -137,7 +137,7 @@ class Tweet extends Weather{
 				$end = mt_rand() / mt_getrandmax() <= 0.2 ? "以上、若菜の天気予報でした。ところでおにいさん、この前相合い傘してた人って。。。誰ですか。。。？" : "以上、若菜の天気予報でした。おにいさん、天気予報はこまめにチェックしなきゃ。。。ですよ？ふふ。";
 				break;
 			case 3:
-				switch ($time) {
+				switch($time) {
 					case "08時30分":
 						$end = "以上、若菜の天気予報でした！ほら！早く起きなよ！！( ｀ ・ ω ・´ )";
 						break;
@@ -147,8 +147,13 @@ class Tweet extends Weather{
 				break;
 				}
 			case 4:
-				$end = "以上、リナの天気予報でしたの!!おにいさま、お気を付けていってらっしゃいませ!!";
-				break;
+				switch($time){
+					case "08時30分":
+						$end = "以上、リナの天気予報でしたの!!おにいさま、お気を付けていってらっしゃいませ!!";
+						break;
+					case "22時30分":
+						$end = "以上、リナの天気予報でしたの!!";
+						break;
 		}
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$end));
 	}
