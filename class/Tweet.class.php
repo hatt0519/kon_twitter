@@ -144,8 +144,8 @@ class Tweet extends Weather{
 					case "22時30分":
 						$end = "以上、若菜の天気予報でした！おにいちゃん、夜更かしはほどほどにね！";
 						break;
-				break;
 				}
+				break;
 			case 4:
 				switch($time){
 					case "08時30分":
@@ -155,6 +155,7 @@ class Tweet extends Weather{
 						$end = "以上、リナの天気予報でしたの!!";
 						break;
 				}
+				break;
 		}
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$end));
 	}
