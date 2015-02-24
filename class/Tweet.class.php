@@ -71,13 +71,13 @@ class Tweet extends Weather{
 				$announce = "ごめんね、残念だけど部室の使用禁止なんだ(´・ω・`)";
 				break;
 			case 2:
-				$announce =  mt_rand() / mt_getrandmax() <= 0.2 ? "今日、部室の使用禁止なんです。。。でもこれで私と一緒にいてくれますよね。。。？ねえ、おにいさん。。。" : "おにいさん。。。部室の使用禁止なんです。。。ごめんなさい(´; ω ;｀)";
+				$announce =  mt_rand() / mt_getrandmax() <= 0.2 ? "ごめんなさい、部室の使用禁止なんです。。。でもこれで私と一緒にいてくれますよね。。。？ねえ、おにいさん。。。" : "おにいさん。。。部室の使用禁止なんです。。。ごめんなさい(´; ω ;｀)";
 				break;
 			case 3:
-				$announce = "ごめんおにいちゃん！！今日は部室が使えないんだ！！(＝ω＝.)\n(*´・∀・)あ!!じゃあさ、じゃあさ、あたしと遊ぼ!!!";
+				$announce = "ごめんおにいちゃん！！部室が使えないんだ！！(＝ω＝.)\n(*´・∀・)あ!!じゃあさ、じゃあさ、あたしと遊ぼ!!!";
 				break;
 			case 4:
-				$announce = "ごめんなさいおにいさま、本日は部室が使えませんの。。。";
+				$announce = "ごめんなさいおにいさま、部室が使えませんの。。。";
 				break;
 		}
 		$req = $this->tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$announce));	
