@@ -209,7 +209,7 @@ class Tweet{
                 self::$tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$sister_announce));
                 $Available_Room = json_decode(Data::AccessAPI(self::$NOON));
                 break;
-			default:
+            default:
                 switch($sister){
                     case 0:
                         $sister_announce = $time.$announce[0][0];
@@ -242,7 +242,7 @@ class Tweet{
                 switch ($sister) {
                     case 0:
                         $message = $time."現在、".$value->period."限の".$value->room."室が空いてるよ!!\n予約はこちらからしてね!!http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
-                        break;					
+                        break;
                     case 1:
                         $message = $time."現在、".$value->period."限の".$value->room."室が空いてます。\n予約はこちらからお願いしますね。http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
                         break;
@@ -275,7 +275,7 @@ class Tweet{
         }
     }
 
-	public function TweetAvailableRoomNextDay($sister, $time) //次の日の部室の空き状況
+    public function TweetAvailableRoomNextDay($sister, $time) //次の日の部室の空き状況
     {
         $announce = array(
                         array(
@@ -307,18 +307,18 @@ class Tweet{
         if($ban_flg->ban_flg == 1){
             $this->TweetBan($sister); //禁止ならば禁止である旨をつぶやく
         }elseif(!empty($Available_Room)){ //禁止でなく、部室に空きがあるとき
-        	foreach($Available_Room as $value){
-        		switch ($sister) {
-        			case 0:
-        			    $message = $time."現在、".$value->period."限の".$value->room."室が空いてるよ!!\n予約はこちらからしてね!!http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
-        			    break;					
-        			case 1:
-        	            $message = $time."現在、".$value->period."限の".$value->room."室が空いてます。\n予約はこちらからお願いしますね。http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
-        	            break;
-        	        case 2:
-        	            $message = $time."現在、".$value->period."限の".$value->room."室が空いてるんだ!!\n予約はこっちだよ!!http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
-        	            break;
-        	        case 3:
+            foreach($Available_Room as $value){
+                switch ($sister) {
+                    case 0:
+                        $message = $time."現在、".$value->period."限の".$value->room."室が空いてるよ!!\n予約はこちらからしてね!!http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
+                        break;
+                   case 1:
+                        $message = $time."現在、".$value->period."限の".$value->room."室が空いてます。\n予約はこちらからお願いしますね。http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
+                        break;
+                    case 2:
+                        $message = $time."現在、".$value->period."限の".$value->room."室が空いてるんだ!!\n予約はこっちだよ!!http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
+                        break;
+                    case 3:
                         $message = $time."現在、".$value->period."限の".$value->room."室が空いていますわ。\nご予約はこちらですわ。http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
                         break;
                 }
@@ -352,7 +352,7 @@ class Tweet{
                 switch ($sister) {
                     case 0:
                         $announce = $time."現在、".$value->name."に遅延が発生しているみたい。\n詳しくはhttp://jr-central.co.jp/";
-                        break;					
+                        break;
                     case 1:
                         $announce = $time."現在、".$value->name."に遅延が発生しているみたいです。\n詳しくはhttp://jr-central.co.jp/";
                         break;
@@ -370,7 +370,7 @@ class Tweet{
     }
     public function ChangeProfile($sister) //妹のプロフィール画像切り替え
     {
-    	switch($sister){
+        switch($sister){
             case 0:
                 $image = './images/kon_sister.png';	
                 $message = "おにいちゃん、メイだよ。今日は私がサポートするね!!";
@@ -389,7 +389,7 @@ class Tweet{
                 break;
         }
         self::$tweet->oAuthRequestImage("https://api.twitter.com/1.1/account/update_profile_image.json",array('image'=>$image));
-        sleep(10);			
+        sleep(10);
         self::$tweet->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$message));
     }
 }
