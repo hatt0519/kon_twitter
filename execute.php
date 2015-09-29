@@ -23,35 +23,35 @@ $time = $today->format("H時i分");
 $sister = $Sister->getSister();
 
 switch ($time){
-	case "07時00分":
-		$Sister->shiftChange($sister);
-		$Sister->registSister();
-		break;
-	case "07時50分":
-		$Tweet->ChangeProfile($sister);
-		break;
-	case "08時00分":
-		$Tweet->TweetMorningMessage($sister);
-		if($ban_checker->ban_flg != 1){
-			$Tweet->TweetAvailableRoomToday($sister, $time);
-		}else{
-			$Tweet->TweetBan($sister);
-		}
-		break;
-	case "08時30分":
-		$Tweet->WeatherNews($sister, $time);
-		break;
-	case "22時00分":
-		$Tweet->TweetAvailableRoomNextDay($sister, $time);
-		break;
-	case "22時30分":
-		$Tweet->WeatherNews($sister,$time);
-		break;
-	default:
-		if($ban_checker->ban_flg != 1){
-			$Tweet->TweetAvailableRoomToday($sister, $time);
-		} //禁止日のときはスルー
-		break;
+    case "07時00分":
+        $Sister->shiftChange($sister);
+        $Sister->registSister();
+        break;
+    case "07時50分":
+        $Tweet->ChangeProfile($sister);
+        break;
+    case "08時00分":
+        $Tweet->TweetMorningMessage($sister);
+        if($ban_checker->ban_flg != 1){
+            $Tweet->TweetAvailableRoomToday($sister, $time);
+        }else{
+            $Tweet->TweetBan($sister);
+        }
+        break;
+    case "08時30分":
+        $Tweet->WeatherNews($sister, $time);
+        break;
+    case "22時00分":
+        $Tweet->TweetAvailableRoomNextDay($sister, $time);
+        break;
+    case "22時30分":
+        $Tweet->WeatherNews($sister,$time);
+        break;
+    default:
+        if($ban_checker->ban_flg != 1){
+            $Tweet->TweetAvailableRoomToday($sister, $time);
+        } //禁止日のときはスルー
+        break;
 }
 $Tweet->TweetTrainInfo($sister); //列車運行状況は共通
 echo "つぶやき完了ヾ(*・∀・)/"; //実行通知

@@ -8,19 +8,18 @@
  */
 
 class Data{
-	public static function AccessAPI($url) //APIのURLを受け取り、その結果を返す
-	{
+    public static function AccessAPI($url) //APIのURLを受け取り、その結果を返す
+    {
 
-		$conn = curl_init();
-		 
-		curl_setopt($conn, CURLOPT_URL, $url);
-		curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
-		 
-		$response = curl_exec($conn);
-		 
-		curl_close($conn);
-
-		return $response;
-	}
+        $conn = curl_init();
+         
+        curl_setopt($conn, CURLOPT_URL, $url);
+        curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
+         
+        $response = curl_exec($conn);
+         
+        curl_close($conn);
+        return $response;
+    }
 }
 
