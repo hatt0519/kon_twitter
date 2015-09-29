@@ -19,7 +19,6 @@ $ban_checker = json_decode(Data::AccessAPI($BAN)); //禁止日チェック
 
 $today = new DateTime();
 $time = $today->format("H時i分");
-$time = "22時00分";
 
 $sister = $Sister->getSister();
 
