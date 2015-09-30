@@ -13,7 +13,7 @@ kon_twitter
 #classes/Twitter.php
 -twitterへの各種投稿を行うクラス。
 
-#slasses/Sister.php
+#classes/Sister.php
 -妹の切り替えを行うクラス。このクラスだけDB接続を行う。
 
 #config/access_key.json.dist
