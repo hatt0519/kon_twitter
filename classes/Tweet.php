@@ -31,7 +31,7 @@ class Tweet{
 
     public function __construct()
     {
-        $json = file_get_contents(dirname(__FILE__).DIRECTORY_SEPARATOR."../config/access_key_dammy.json");
+        $json = file_get_contents(dirname(__FILE__).DIRECTORY_SEPARATOR."../config/access_key.json");
         // config取得
         $access_key = json_decode($json); //jsonファイルをPHPオブジェクトに変換
         // Consumer keyの値
