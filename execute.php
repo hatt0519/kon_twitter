@@ -53,5 +53,6 @@ switch ($time){
         } //禁止日のときはスルー
         break;
 }
-$Tweet->TweetTrainInfo($sister, $time); //列車運行状況は共通
+if($time != "07時00分")
+    $Tweet->TweetTrainInfo($sister, $time); //列車運行状況は共通
 echo "つぶやき完了ヾ(*・∀・)/"; //実行通知
