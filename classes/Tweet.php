@@ -344,7 +344,7 @@ class Tweet{
         }
     }
 
-    public function TweetTrainInfo($sister) //電車の運行状況をつぶやく
+    public function TweetTrainInfo($sister, $time) //電車の運行状況をつぶやく
     {
         $train = json_decode(Data::AccessAPI(self::$TRAIN));
         foreach ($train as $value) {
