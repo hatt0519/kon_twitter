@@ -49,7 +49,7 @@ class Sister{
         $now_sister = mt_rand(0,3);
         $pre_sister = self::confirmPreShift();
         while ($now_sister == $pre_sister){
-            $sister = mt_rand(0,3);
+            $now_sister = mt_rand(0,3);
         }
         self::$now_shift = $now_sister;
         self::$pre_shift = $pre_sister;
