@@ -22,7 +22,7 @@ class TwitterOAuth {
   /* Set timeout default. */
   public $timeout = 30;
   /* Set connect timeout. */
-  public $connecttimeout = 30; 
+  public $connecttimeout = 30;
   /* Verify SSL Cert. */
   public $ssl_verifypeer = FALSE;
   /* Respons format. */
@@ -74,7 +74,7 @@ class TwitterOAuth {
    */
   function getRequestToken($oauth_callback) {
     $parameters = array();
-    $parameters['oauth_callback'] = $oauth_callback; 
+    $parameters['oauth_callback'] = $oauth_callback;
     $request = $this->oAuthRequest($this->requestTokenURL(), 'GET', $parameters);
     $token = OAuthUtil::parse_parameters($request);
     $this->token = new OAuthConsumer($token['oauth_token'], $token['oauth_token_secret']);
@@ -123,7 +123,7 @@ class TwitterOAuth {
    *                "user_id" => "9436992",
    *                "screen_name" => "abraham",
    *                "x_auth_expires" => "0")
-   */  
+   */
   function getXAuthToken($username, $password) {
     $parameters = array();
     $parameters['x_auth_username'] = $username;
@@ -145,7 +145,7 @@ class TwitterOAuth {
     }
     return $response;
   }
-  
+
   /**
    * POST wrapper for oAuthRequest.
    */
@@ -198,9 +198,9 @@ class TwitterOAuth {
     }
     $request = OAuthRequest::from_consumer_and_token($this->consumer, $this->token, $method, $url, array());
     $request->sign_request($this->sha1_method, $this->consumer, $this->token);
-    
+
     $headers = array($request->to_header());
-    
+
     if (isset($args['image'])) {
       if (file_exists($args['image'])) {
         $binary = file_get_contents($args['image']);
@@ -210,10 +210,10 @@ class TwitterOAuth {
         $binary = $args['image'];
         $basename = 'image';
       }
-      
+
       preg_match('/\A(?:(\xff\xd8\xff)|(GIF8[79]a)|(\x89PNG\x0d\x0a))/',
                  $binary, $matches);
-      
+
       switch (count($matches) - 1) {
         case 1:
           $mimeType = 'image/jpeg';
@@ -228,7 +228,7 @@ class TwitterOAuth {
           $mimeType = 'application/octet-stream';
           break;
       }
-      
+
       $boundary = md5(time());
       $content = '--' . $boundary . "\r\n"
                . 'Content-Disposition: form-data; name=image; '
@@ -236,13 +236,13 @@ class TwitterOAuth {
                . 'Content-Type: ' . $mimeType . "\r\n"
                . "\r\n" . $binary . "\r\n"
                . '--' . $boundary . '--';
-      
+
       $headers[] = 'Content-Type: multipart/form-data; boundary=' . $boundary;
       $headers[] = 'Content-Length: ' . strlen($content);
-      
+
       $args = $content;
     }
-    
+
     return $this->http($request->get_normalized_http_url(), $method, $args, $headers);
   }
 
