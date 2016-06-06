@@ -1,6 +1,6 @@
 <?php
 
-/* Api.php
+/* api.php
  * 各種APIにアクセスするクラス
  * Author KazukiHatori
  * Email:moroku0519@gmail.com

@@ -1,6 +1,6 @@
 <?php
 
-/* Tweet.php
+/* tweet.php
  * 各種つぶやきを行うクラス
  * Author KazukiHatori
  * Email:moroku0519@gmail.com

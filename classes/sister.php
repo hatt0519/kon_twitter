@@ -1,6 +1,6 @@
 <?php
 
-/* Sister.php
+/* sister.php
  * Author KazukiHatori
  * Email:moroku0519@gmail.com
  * PHP verion 5.4.30
