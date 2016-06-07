@@ -4,7 +4,7 @@
  * 各種つぶやきを行うクラス
  * Author KazukiHatori
  * Email:moroku0519@gmail.com
- * PHP verion 5.4.30
+ * PHP verion 5.5.34
  */
 
 namespace Kon;

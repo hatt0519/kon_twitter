@@ -3,13 +3,14 @@
 /* sister.php
  * Author KazukiHatori
  * Email:moroku0519@gmail.com
- * PHP verion 5.4.30
+ * PHP verion 5.5.34
  * その日の妹を選出するクラス、DB接続含む（PDOクラス使用）
  */
 
 namespace Kon;
 
-class Sister extends DB {
+class Sister extends DB
+{
 
     private static $now_sister;
 
