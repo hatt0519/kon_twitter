@@ -1,6 +1,6 @@
 <?php
 
-namespace Kon
+namespace Kon;
 
 class Uri
 {
