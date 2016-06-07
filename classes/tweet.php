@@ -11,11 +11,10 @@ namespace Kon;
 
 require_once(__DIR__ . DIRECTORY_SEPARATOR. '../auth/twitteroauth.php');
 
+use \Kon\Uri;
+
 class Tweet
 {
-
-    const UPDATE = 'https://api.twitter.com/1.1/statuses/update.json';
-    const UPDATE_PROFILE_IMAGE = 'https://api.twitter.com/1.1/account/update_profile_image.json';
     //OAuthオブジェクトを格納するプロパティ
     private $tweet;
     private $uri;
@@ -38,7 +37,7 @@ class Tweet
 
     public function tweetMessage($message)
     {
-        $this->tweet->OAuthRequest(self::UPDATE, "POST", array("status"=>$message));
+        $this->tweet->OAuthRequest(Uri::UPDATE, "POST", array("status"=>$message));
     }
 
     public function tweetMessageArray($massages)
@@ -57,6 +56,6 @@ class Tweet
                        './images/kon_sister_3.jpg',
                        './images/kon_sister_4.jpg');
 
-        $this->tweet->oAuthRequestImage(self::UPDATE_PROFILE_IMAGE, array('image' => $images[$sister]));
+        $this->tweet->oAuthRequestImage(Uri::UPDATE_PROFILE_IMAGE, array('image' => $images[$sister]));
     }
 }
