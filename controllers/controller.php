@@ -13,7 +13,7 @@ class Controller
     {
         $ban_checker_uri = Uri::CHECKER.'?month='.$today->format('m').'&day='.$today->format('d').'&search_type=ban';
         $holiday_checker_uri = Uri::CHECKER.'?month='.$today->format('m').'&day='.$today->format('d').'&search_type=holiday';
-        $available_room_uri = Uri::AVAILABLE_ROOM'?month='.$today->format('m').'&day='.$today->format('d');
+        $available_room_uri = Uri::AVAILABLE_ROOM.'?month='.$today->format('m').'&day='.$today->format('d');
         $is_ban = Checker::is_ban($ban_checker_uri);
         $is_holiday = Checker::is_holiday($holiday_checker_uri);
         $message = new MessageMaker($selected_sister, $is_holiday, $is_ban);
