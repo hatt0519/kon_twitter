@@ -25,7 +25,7 @@ class Api
         return $response;
     }
 
-    public function convertJson($uri)
+    public static function convertJson($uri)
     {
         return json_decode(self::AccessAPI($uri));
     }
