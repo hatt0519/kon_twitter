@@ -1,3 +1,7 @@
+<?php
+
+namespace Kon
+
 class Uri
 {
     const WEATHER = 'http://www.drk7.jp/weather/xml/22.xml';
