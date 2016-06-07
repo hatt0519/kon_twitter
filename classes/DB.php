@@ -16,7 +16,7 @@ class DB
             //PDOオブジェクト生成
             $this->dbh = new \PDO($dns, $access_key->db_user, $access_key->db_password);
         }
-        catch(PDOException $e)
+        catch(\PDOException $e)
         {
             print('Error:'.$e->getMessage());
             die();

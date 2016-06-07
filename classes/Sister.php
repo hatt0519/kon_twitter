@@ -12,7 +12,7 @@ namespace Kon;
 class Sister extends DB
 {
 
-    private static $now_sister;
+    private $now_sister;
 
     public function __construct()
     {
