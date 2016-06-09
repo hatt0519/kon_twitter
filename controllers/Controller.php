@@ -29,7 +29,7 @@ class Controller
             case "07時50分":
                 $shift_message = $message->shift();
                 $tweet->tweetMessage($shift_message);
-                $tweet->changeProfile($selected_sister);
+                $tweet->changeProfile($sister->noticeNowSister());
                 break;
             case "08時30分":
                 $weather_message = $message->weatherNews($time, $today->format('m'), $today->format('d'), Uri::WEATHER, Uri::WARNING);
