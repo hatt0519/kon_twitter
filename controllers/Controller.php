@@ -23,7 +23,6 @@ class Controller
         switch($time)
         {
             case "07時00分":
-                $sister->shiftChange();
                 $sister->registSister();
                 break;
             case "07時50分":
@@ -33,35 +32,34 @@ class Controller
                 break;
             case "08時30分":
                 $weather_message = $message->weatherNews($time, $today->format('m'), $today->format('d'), Uri::WEATHER, Uri::WARNING);
-                $tweet->tweetMessage($weather_message);
+                $tweet->tweetMessageArray($weather_message);
                 break;
             case "22時30分":
                 $today->modify('+1days');
                 $weather_message = $message->weatherNews($time, $today->format('m'), $today->format('d'), Uri::WEATHER, Uri::WARNING);
-                $tweet->tweetMessage($weather_message);
+                $tweet->tweetMessageArray($weather_message);
                 break;
             default:
                 switch($time)
                 {
                     case "08時00分":
                         $default_message_plus = $message->default_morning();
-                        $default_message = $message->default_other($time);
                         break;
                     case "12時10分":
                         $default_message_plus = $message->default_noon();
                         $available_room_uri .= '&period=3&search_range=after';
-                        $default_message = $message->default_other($time);
+                        $default_message = $message->default_other($time, 3);
                         break;
                     case "14時30分":
                         $available_room_uri .= '&period=4&search_range=after';
-                        $default_message = $message->default_other($time);
+                        $default_message = $message->default_other($time, 4);
                         break;
                     case "16時10分":
                         $available_room_uri .= '&period=5&search_range=after';
-                        $default_message = $message->default_other($time);
+                        $default_message = $message->default_other($time, 5);
                         break;
                     case "17時50分":
-                        $default_message = $message->default_other($time);
+                        if(!$is_holiday) $default_message = $message->default_other($time);
                         $available_room_uri .= '&period=6&search_range=after';
                         break;
                     case "22時00分":

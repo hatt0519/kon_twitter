@@ -22,14 +22,7 @@ class Sister extends DB
 
     public function noticeNowSister(){ return $this->now_sister; }
 
-    public function shiftChange() //現在の妹をシフトから外す
-    {
-        $sql = "UPDATE sisters SET shift_flg = 0, pre_shift_flg = 1 WHERE id = ?";
-        $sth = $this->dbh->prepare($sql);
-        $sth->execute(array($this->now_sister));
-    }
-
-    private function chooseSister() //次の妹を選出
+    private function chooseNextSister() //次の妹を選出
     {
         $next_sister = mt_rand(0,3);
         while ($next_sister == $this->now_sister){
@@ -40,26 +33,10 @@ class Sister extends DB
 
     public function registSister() //次の妹を登録
     {
-        $next_sister = $this->chooseSister();
-        $sql_ary = array("UPDATE sisters SET pre_shift_flg = 0 WHERE id = ?",
-                         "UPDATE sisters SET shift_flg = 1 WHERE id = ?");
-        $counter = 0;
-        foreach ($sql_ary as $sql) {
-            $sth = $this->dbh->prepare($sql);
-            $sth->execute(
-                $counter == 0 ? array($this->now_sister) : array($next_sister)
-            );
-            $counter++;
-        }
-    }
-
-    private function referencePreSister() //前回の妹を調べる
-    {
-        $sql = "SELECT id FROM sisters WHERE pre_shift_flg = 1";
+        $sql = "UPDATE sisters SET shift_flg = ? WHERE id = ?";
         $sth = $this->dbh->prepare($sql);
-        $sth->execute();
-        $rs = $sth->fetch(\PDO::FETCH_OBJ);
-        return $rs->id;
+        $sth->execute(array(0, $this->now_sister));
+        $sth->execute(array(1, $this->chooseNextSister()));
     }
 
     private function getNowSister() //現在の妹を取得

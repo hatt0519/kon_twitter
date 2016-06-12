@@ -99,22 +99,27 @@ class MessageMaker extends Api
         return $message;
     }
 
-    public function default_other($time)
+    public function default_other($time, $period)
     {
+        $holiday_period_announce = array("2" => "2限が10:20から、昼が11:40から、4限が14:20から、5限が15:40から",
+                                         "3" => "昼が11:40から、4限が14:20から、5限が15:40から",
+                                         "4" => "4限が14:20から、5限が15:40から",
+                                         "5" => "5限が15:40から"
+                                        );
         $announce = array(
                         array(
                             "現在の部室の空き状況を教えるね！！",
-                            "おにいちゃん、今日は4限が14:20から、5限が15:40から開始だから気をつけてね!!"
+                            "おにいちゃん、今日は".$holiday_period_announce[$period]."開始だから気をつけてね!!"
                             ),
                         array(
                             "現在の部室の空き状況です！！",
-                            "おにいさん、今日は4限が14:20から、5限が15:40から開始なので気をつけてくださいね!!"),
+                            "おにいさん、今日は".$holiday_period_announce[$period]."開始なので気をつけてくださいね!!"),
                         array(
                             "現在の部室の空き状況だよ！！",
-                            "おにいちゃん、今日は4限が14:20から、5限が15:40から開始だから気をつけなきゃだね!!"),
+                            "おにいちゃん、今日は".$holiday_period_announce[$period]."開始だから気をつけなきゃだね!!"),
                         array(
                             "現在の部室の空き状況ですわ！！",
-                            "おにいさま、本日は4限が14:20から、5限が15:40から開始ですのでお気をつけくださいませ!!")
+                            "おにいさま、本日は".$holiday_period_announce[$period]."開始ですのでお気をつけくださいませ!!")
                         ); //共通のつぶやき
         $message = $this->is_holiday ? $announce[$this->sister][1] : $time.$announce[$this->sister][0];
         return $message;
@@ -167,7 +172,7 @@ class MessageMaker extends Api
                                       "以上、リナの天気予報でしたの!!")
                             )
                     );
-        $begin_message = $message[$time][0];
+        $begin_message = $message[$time][0][$this->sister];
         $weather = $this->weather($month, $day, $weather_uri);
         $warning = $this->warning($warning_uri);
         if($this->sister == 1)
@@ -179,7 +184,7 @@ class MessageMaker extends Api
             $end_message = $message[$time][1][$this->sister];
         }
         $messages = array($begin_message, $weather, $warning, $end_message);
-
+        return $messages;
     }
 
     public function weather($month, $day, $uri) //天気予報のメッセージ作成
