@@ -18,7 +18,7 @@ class Controller
         $is_ban = Checker::is_ban($ban_checker_uri);
         $is_holiday = Checker::is_holiday($holiday_checker_uri);
         $sister = new Sister();
-        $message = new MessageMaker($sister->noticeNowSister(), $is_holiday, $is_ban);
+        $message = new MessageMaker($sister->noticeNowSister(), $is_holiday, $is_ban, $time);
         $tweet = new Tweet($json);
         switch($time)
         {
@@ -31,12 +31,12 @@ class Controller
                 $tweet->changeProfile($sister->noticeNowSister());
                 break;
             case "08時30分":
-                $weather_message = $message->weatherNews($time, $today->format('m'), $today->format('d'), Uri::WEATHER, Uri::WARNING);
+                $weather_message = $message->weatherNews($today->format('m'), $today->format('d'), Uri::WEATHER, Uri::WARNING);
                 $tweet->tweetMessageArray($weather_message);
                 break;
             case "22時30分":
                 $today->modify('+1days');
-                $weather_message = $message->weatherNews($time, $today->format('m'), $today->format('d'), Uri::WEATHER, Uri::WARNING);
+                $weather_message = $message->weatherNews($today->format('m'), $today->format('d'), Uri::WEATHER, Uri::WARNING);
                 $tweet->tweetMessageArray($weather_message);
                 break;
             default:
@@ -48,18 +48,18 @@ class Controller
                     case "12時10分":
                         $default_message_plus = $message->default_noon();
                         $available_room_uri .= '&period=3&search_range=after';
-                        $default_message = $message->default_other($time, 3);
+                        $default_message = $message->default_other(3);
                         break;
                     case "14時30分":
                         $available_room_uri .= '&period=4&search_range=after';
-                        $default_message = $message->default_other($time, 4);
+                        $default_message = $message->default_other(4);
                         break;
                     case "16時10分":
                         $available_room_uri .= '&period=5&search_range=after';
-                        $default_message = $message->default_other($time, 5);
+                        $default_message = $message->default_other(5);
                         break;
                     case "17時50分":
-                        if(!$is_holiday) $default_message = $message->default_other($time);
+                        if(!$is_holiday) $default_message = $message->default_other();
                         $available_room_uri .= '&period=6&search_range=after';
                         break;
                     case "22時00分":
@@ -70,7 +70,7 @@ class Controller
                     default:
                         break;
                 }
-                $available_room_message = $message->available_room($time, $available_room_uri);
+                $available_room_message = $message->available_room($available_room_uri);
                 if(isset($default_message)) array_unshift($available_room_message, $default_message);
                 if(isset($default_message_plus)) array_unshift($available_room_message, $default_message_plus);
                 $tweet->tweetMessageArray($available_room_message);

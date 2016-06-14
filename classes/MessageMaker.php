@@ -7,12 +7,14 @@ class MessageMaker extends Api
     private $sister;
     private $is_holiday;
     private $is_ban;
+    private $time;
 
-    function __construct($sister, $is_holiday, $is_ban)
+    function __construct($sister, $is_holiday, $is_ban, $time)
     {
         $this->sister = $sister;
         $this->is_holiday = $is_holiday;
         $this->is_ban = $is_ban;
+        $this->time = $time;
     }
 
     public function default_morning()
@@ -99,7 +101,7 @@ class MessageMaker extends Api
         return $message;
     }
 
-    public function default_other($time, $period)
+    public function default_other($period)
     {
         $holiday_period_announce = array("2" => "2限が10:20から、昼が11:40から、4限が14:20から、5限が15:40から",
                                          "3" => "昼が11:40から、4限が14:20から、5限が15:40から",
@@ -121,7 +123,7 @@ class MessageMaker extends Api
                             "現在の部室の空き状況ですわ！！",
                             "おにいさま、本日は".$holiday_period_announce[$period]."開始ですのでお気をつけくださいませ!!")
                         ); //共通のつぶやき
-        $message = $this->is_holiday ? $announce[$this->sister][1] : $time.$announce[$this->sister][0];
+        $message = $this->is_holiday ? $announce[$this->sister][1] : $this->time.$announce[$this->sister][0];
         return $message;
     }
 
@@ -145,7 +147,7 @@ class MessageMaker extends Api
         return $sister_announce;
     }
 
-    public function weatherNews($time, $month, $day, $weather_uri, $warning_uri)
+    public function weatherNews($month, $day, $weather_uri, $warning_uri)
     {
         $message = array("08時30分" =>
                             array(
@@ -172,16 +174,16 @@ class MessageMaker extends Api
                                       "以上、リナの天気予報でしたの!!")
                             )
                     );
-        $begin_message = $message[$time][0][$this->sister];
+        $begin_message = $message[$this->time][0][$this->sister];
         $weather = $this->weather($month, $day, $weather_uri);
         $warning = $this->warning($warning_uri);
         if($this->sister == 1)
         {
-            $end_message = mt_rand() / mt_getrandmax() <= 0.2 ? $message[$time][1][1][0] : $message[$time][1][1][1];
+            $end_message = mt_rand() / mt_getrandmax() <= 0.2 ? $message[$this->time][1][1][0] : $message[$this->time][1][1][1];
         }
         else
         {
-            $end_message = $message[$time][1][$this->sister];
+            $end_message = $message[$this->time][1][$this->sister];
         }
         $messages = array($begin_message, $weather, $warning, $end_message);
         return $messages;
@@ -238,7 +240,7 @@ class MessageMaker extends Api
         return $message;
     }
 
-    public function available_room($time, $uri)
+    public function available_room($uri)
     {
         $available_room = json_decode(self::AccessAPI($uri));
         do
@@ -250,23 +252,23 @@ class MessageMaker extends Api
             }
             if(empty($available_room))
             {
-                $messages[] = $this->no_available_room($time);
+                $messages[] = $this->no_available_room();
                 break;
             }
             foreach($available_room as $value)
             {
                 switch ($this->sister) {
                     case 0:
-                        $messages[] = $time."現在、".$value->period."限の".$value->room."室が空いてるよ!!\n予約はこちらからしてね!!http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
+                        $messages[] = $this->time."現在、".$value->period."限の".$value->room."室が空いてるよ!!\n予約はこちらからしてね!!http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
                         break;
                     case 1:
-                        $messages[] = $time."現在、".$value->period."限の".$value->room."室が空いてます。\n予約はこちらからお願いしますね。http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
+                        $messages[] = $this->time."現在、".$value->period."限の".$value->room."室が空いてます。\n予約はこちらからお願いしますね。http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
                         break;
                     case 2:
-                        $messages[] = $time."現在、".$value->period."限の".$value->room."室が空いてるんだ!!\n予約はこっちだよ!!http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
+                        $messages[] = $this->time."現在、".$value->period."限の".$value->room."室が空いてるんだ!!\n予約はこっちだよ!!http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
                         break;
                     case 3:
-                        $messages[] = $time."現在、".$value->period."限の".$value->room."室が空いていますわ。\nご予約はこちらですわ。http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
+                        $messages[] = $this->time."現在、".$value->period."限の".$value->room."室が空いていますわ。\nご予約はこちらですわ。http://www.kendai-kon.info/new_input.cgi?id=".$value->id;
                         break;
                 }
             }
@@ -275,21 +277,21 @@ class MessageMaker extends Api
         return $messages;
     }
 
-    public function no_available_room($time)
+    public function no_available_room()
     {
         switch ($this->sister)
         {
             case 0:
-                $message = "ごめんなさい、".$time."現在、空いてる部室はないんだ。";
+                $message = "ごめんなさい、".$this->time."現在、空いてる部室はないんだ。";
                 break;
             case 1:
-                $message = "ごめんなさい、".$time."現在、空いてる部室はありません。";
+                $message = "ごめんなさい、".$this->time."現在、空いてる部室はありません。";
                 break;
             case 2:
-                $message = "ごめんね、".$time."現在、空いてる部室はないんだ。";
+                $message = "ごめんね、".$this->time."現在、空いてる部室はないんだ。";
                 break;
             case 3:
-                $message = "ごめんなさいですわ、".$time."現在、空いてる部室はありませんの。";
+                $message = "ごめんなさいですわ、".$this->time."現在、空いてる部室はありませんの。";
                 break;
         }
         return $message;
@@ -301,18 +303,18 @@ class MessageMaker extends Api
         $message = '';
         foreach ($train as $value) {
             if(preg_match("/東海道本線/", $value->name)){
-                switch ($sister) {
+                switch ($this->sister) {
                     case 0:
-                        $message = $time."現在、".$value->name."に遅延が発生しているみたい。\n詳しくはhttp://jr-central.co.jp/";
+                        $message = $this->time."現在、".$value->name."に遅延が発生しているみたい。\n詳しくはhttp://jr-central.co.jp/";
                         break;
                     case 1:
-                        $message = $time."現在、".$value->name."に遅延が発生しているみたいです。\n詳しくはhttp://jr-central.co.jp/";
+                        $message = $this->time."現在、".$value->name."に遅延が発生しているみたいです。\n詳しくはhttp://jr-central.co.jp/";
                         break;
                     case 2:
-                        $message = $time."現在、".$value->name."に遅延が発生しているみたいだね。\n詳しくはhttp://jr-central.co.jp/";
+                        $message = $this->time."現在、".$value->name."に遅延が発生しているみたいだね。\n詳しくはhttp://jr-central.co.jp/";
                         break;
                     case 3:
-                        $message = $time."現在、".$value->name."に遅延が発生しているみたいですわ。\n詳しくはhttp://jr-central.co.jp/";
+                        $message = $this->time."現在、".$value->name."に遅延が発生しているみたいですわ。\n詳しくはhttp://jr-central.co.jp/";
                         break;
                 }
             }
